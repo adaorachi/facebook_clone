@@ -1,24 +1,8 @@
-# README
+# FACEBOOK CLONE
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project is a Facebook-like social network application built with rails.
 
-Things you may want to cover:
+## Data Architecture Documentation (ERD)
+The image below is a copy of the Entity Relationship Diagram generated for this project.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+<img src="app/assets/images/download(1).png" alt="Entity Relationship Diagram">
