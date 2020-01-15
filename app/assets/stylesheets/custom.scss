@@ -155,7 +155,6 @@
 body,
 .main {
   background: #e9ebee;
-  height: 100vh;
 }
 
 .home-body {
@@ -479,7 +478,6 @@ textarea:focus {
 }
 
 .flashmsg {
-  transform: translateY(40px);
   width: 50%;
   margin: 0 auto;
 }
@@ -488,4 +486,7 @@ textarea:focus {
   border-radius: 50%;
 }
 
+.field_with_errors {
+  width: 100%;
+}
 
