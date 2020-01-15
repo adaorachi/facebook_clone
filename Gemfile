@@ -3,10 +3,13 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.4'
 
+
 # Custom gems
 gem 'devise'
 gem 'faker'
 gem 'font_awesome5_rails'
+gem 'omniauth-facebook'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
