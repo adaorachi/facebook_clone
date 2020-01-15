@@ -1,0 +1,14 @@
+<% if current_user.liked?(post) %>
+  <%= form_for(current_user.like_posts.find_by(post_id: post), html: { method: :delete }) do |f| %>
+    <span class="nav-link">
+      <%= f.button fa_icon("thumbs-up", text: "Unlike", class: "post-icon"), class: "like-button" %>
+    </span>
+  <% end %>
+<% else %>
+  <%= form_for(current_user.like_posts.build) do |f| %>
+    <%= hidden_field_tag :post_id, post.id %>  
+    <span class="nav-link">
+        <%= f.button fa_icon("thumbs-up", text: "Like", type: :regular, class: "post-icon"), class: "like-button" %>
+    </span>
+  <% end %>
+<% end %>
