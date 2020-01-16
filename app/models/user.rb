@@ -14,4 +14,20 @@ class User < ApplicationRecord
   validates :surname, presence: true, length: { in: 3..100 }
   validates :birthdate, presence: true
   validates :gender, presence: true
+
+  def like(post)
+    liked_posts << post
+  end
+
+  def unlike(post)
+    liked_posts.delete(post)
+  end
+
+  def liked?(post)
+    liked_posts.include?(post)
+  end
+
+  def name
+    "#{firstname} #{surname}"
+  end
 end

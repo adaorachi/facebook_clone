@@ -127,13 +127,13 @@
               <div class="liked-users">
                 <ul class="navbar-nav d-flex align-items-center flex-row">
 
-                   
+                    <%= render partial: 'like_stats', locals: {post: post} %>
 
                   <li class="nav-item ml-auto">
                     <span class="nav-link" title="Me">1 share</span>
                   </li>
                   <li class="nav-item ml-2">
-                    <span class="nav-link" title="me">1 like</span>
+                    <span class="nav-link" title="me"><%= post.liked_by_users.count %> like</span>
                   </li>
                 </ul>
               </div>
