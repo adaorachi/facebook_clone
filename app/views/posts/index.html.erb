@@ -137,8 +137,30 @@
                   </li>
                 </ul>
               </div>
+              <div class="like-icon my-2">
+                <ul class="navbar-nav d-flex align-items-center justify-content-around flex-row">
+                  <li class="nav-item" id="like-rendered-form">
+                    
+                   <%= render partial: 'like_form', locals: {post: post} %>
+
+                  </li>
+                  <li class="nav-item ml-2">
+                    <span class="nav-link">
+                      <button class="like-button">
+                        <%= fa_icon 'comment-alt', type: :regular, class: 'post-icon' %> Comment
+                      </button>
+                    </span>
+                  </li>
+                  <li class="nav-item">
+                    <span class="nav-link">
+                      <button class="like-button">
+                        <%= fa_icon "share", class: 'post-icon' %> Share
+                      </button>
+                    </span>
+                  </li>
+                </ul>
+              </div>
             </div>
-           
 
             <div class="show-comments">
               <ul class="list-group list-group-flush">

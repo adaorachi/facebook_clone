@@ -13,12 +13,13 @@ Rails.application.routes.draw do
 
   resources :users do
     member do
-      get :liked_posts
+      get :like_posts
     end
   end
 
   resources :posts
   resources :comments
+  resources :like_posts, only: [:create, :destroy]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
