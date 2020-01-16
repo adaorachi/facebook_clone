@@ -1,0 +1,150 @@
+<div class="container-fluid newsfeed py-2">
+  <div class="row">
+    <div class="col-2">
+      <div class="left-column">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item content mb-3 mt-2">
+            <%= link_to users_path do %>
+              <span><%= gravatar_for(current_user, size:20) %></span>
+              <span><%= name(current_user) %></span>
+            <% end %>
+          </li>
+          <li class="list-group-item content active">
+            <%= link_to users_path do %>
+              <span><%= image_tag("newsfeed.png", :alt => "NewsFeed", :width => '20') %></span> 
+              <span>News Feed</span>  
+            <% end %>       
+          </li>
+          <li class="list-group-item content">
+            <%= link_to users_path do %>
+              <span><%= image_tag("messenger.png", :alt => "messenger", :width => '20') %></span> 
+              <span>Messenger</span>    
+            <% end %>     
+          </li>
+          <li class="list-group-item content">
+            <%= link_to users_path do %>
+              <span><%= image_tag("video.png", :alt => "Video", :width => '20') %></span> 
+              <span>Videos on Watch</span>    
+            <% end %>     
+          </li>
+          <li class="list-group-item subtitle mt-1">
+            Explore   
+          </li>
+          <li class="list-group-item content">
+            <%= link_to users_path do %>
+              <span><%= image_tag("group.png", :alt => "Groups", :width => '20') %></span> 
+              <span>Groups</span>    
+            <% end %>     
+          </li>
+          <li class="list-group-item content">
+            <%= link_to users_path do %>
+              <span><%= image_tag("pages.png", :alt => "Pages", :width => '20') %></span> 
+              <span>Pages</span>    
+            <% end %>     
+          </li>
+          <li class="list-group-item content">
+            <%= link_to users_path do %>
+              <span><%= image_tag("events.png", :alt => "Events", :width => '20') %></span> 
+              <span>Events</span>    
+            <% end %>     
+          </li>
+          <li class="list-group-item content">
+            <%= link_to users_path do %>
+              <span><%= image_tag("friend-list.png", :alt => "Friend List", :width => '20') %></span> 
+              <span>Friend List</span>    
+            <% end %>     
+          </li>
+          <li class="list-group-item content">
+            <%= link_to users_path do %>
+              <span><%= image_tag("memories.png", :alt => "Memories", :width => '20') %></span> 
+              <span>Memories</span>    
+            <% end %>     
+          </li>
+          <li class="list-group-item content">
+            <%= link_to users_path do %>
+              <span><%= image_tag("game.png", :alt => "Games", :width => '20') %></span> 
+              <span>Games</span>    
+            <% end %>     
+          </li>
+          <li class="list-group-item content">
+            <%= link_to users_path do %>
+              <span><%= image_tag("saved.png", :alt => "Saved", :width => '20') %></span> 
+              <span>Saved</span>    
+            <% end %>     
+          </li>
+          <li class="list-group-item content">
+            <%= link_to users_path do %>
+              <span><%= image_tag("jobs.png", :alt => "Jobs", :width => '20') %></span> 
+              <span>Jobs</span>    
+            <% end %>     
+          </li>
+          <li class="list-group-item content">
+            <%= link_to users_path do %>
+              <span><%= image_tag("find-friend.png", :alt => "Find Friend", :width => '20') %></span> 
+              <span>Find Friends</span>    
+            <% end %>     
+          </li>
+          <li class="list-group-item content">
+            <%= link_to users_path do %>
+              <span><%= image_tag("weather.png", :alt => "Weather", :width => '20') %></span> 
+              <span>Weather</span>    
+            <% end %>     
+          </li>
+          <li class="list-group-item content">
+            <%= link_to users_path do %>
+              <span><%= image_tag("notes.png", :alt => "Notes", :width => '20') %></span> 
+              <span>Notes</span>    
+            <% end %>     
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="center-column">
+        <div class="card">
+          <h5 class="card-header">Create Post</h5>
+          <div class="card-body">
+            <%= form_for(@post) do |f| %>
+              <div class="text-area-content">
+                <%= content_tag :div, gravatar_for(current_user, size: 40 ), class: "text-area-image" %>
+                <%= f.text_area :body, class: "form-control", placeholder: "What's on your mind, #{current_user.firstname}?" %>
+              </div>
+              <%= f.submit "Post", class: "btn btn-primary text-post-button" %>
+            <% end %>
+          </div>
+        </div>
+        <% @posts.each do |post| %>
+          <div class="card post-card my-2">
+            <div class="card-body">
+              <div class="post-creator mb-3">
+                <span><%= link_to gravatar_for(post.user, size: 35 ), user_path(post.user), class: "post-image" %></span>
+                <div class="post-creator-info">
+                  <p class="card-subtitle "><%= link_to name(post.user), user_path(post.user) %></p>
+                  <p class="card-subtitle"><%= distance_of_time_in_words(Time.now, post.created_at) %> ago</p>
+                </div>
+              </div>
+              <%= content_tag :p, post.body, class: "card-text" %>
+              <div class="liked-users">
+                <ul class="navbar-nav d-flex align-items-center flex-row">
+
+
+
+                  <li class="nav-item ml-auto">
+                    <span class="nav-link" title="Me">24 shares</span>
+                  </li>
+                  <li class="nav-item ml-2">
+                    <span class="nav-link" title="me">10 likes</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col">
+      
+    </div>
+  </div>
+</div>
