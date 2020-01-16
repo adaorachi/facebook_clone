@@ -127,44 +127,22 @@
               <div class="liked-users">
                 <ul class="navbar-nav d-flex align-items-center flex-row">
 
-                   <%= render partial: 'like_stats', locals: {post: post} %>
+                   
 
                   <li class="nav-item ml-auto">
-                    <span class="nav-link" title="Me">24 shares</span>
+                    <span class="nav-link" title="Me">1 share</span>
                   </li>
                   <li class="nav-item ml-2">
-                    <span class="nav-link" title="me">10 likes</span>
+                    <span class="nav-link" title="me">1 like</span>
                   </li>
                 </ul>
               </div>
             </div>
-            <div class="like-icon my-2">
-              <ul class="navbar-nav d-flex align-items-center justify-content-around flex-row">
-                <li class="nav-item" id="like-rendered-form">
-                  
-                  <%= render partial: 'like_form', locals: {post: post} %>
-
-                </li>
-                <li class="nav-item ml-2">
-                  <span class="nav-link">
-                    <button class="like-button">
-                      <%= fa_icon 'comment-alt', type: :regular, class: 'post-icon' %> Comment
-                    </button>
-                  </span>
-                </li>
-                <li class="nav-item">
-                  <span class="nav-link">
-                    <button class="like-button">
-                      <%= fa_icon "share", class: 'post-icon' %> Share
-                    </button>
-                  </span>
-                </li>
-              </ul>
-            </div>
+           
 
             <div class="show-comments">
               <ul class="list-group list-group-flush">
-                <li class="list-group-item"> <%= link_to "View 7 more comments", '#' %></li>
+                <li class="list-group-item"> <%= link_to "View #{pluralize(post.comments.count, 'comment')}", '#' %></li>
                 <% post.comments.each do |comment| %>
                   <li class="list-group-item">
                     <div class="post-creator">
