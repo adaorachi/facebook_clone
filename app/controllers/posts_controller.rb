@@ -20,6 +20,9 @@ class PostsController < ApplicationController
   def access_actions
     @post = Post.new
     @posts = Post.all
+
+    @comment = Comment.new
+    @comments = Comment.all
   end
 
   def post_params
