@@ -22,5 +22,8 @@ Rails.application.routes.draw do
   resources :like_posts, only: [:create, :destroy]
   resources :friendships
 
+  get 'received_request', to: 'friendships#received_request'
+  get 'sent_request', to: 'friendships#sent_request'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

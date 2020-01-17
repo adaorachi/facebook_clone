@@ -36,4 +36,39 @@ class User < ApplicationRecord
   def name
     "#{firstname} #{surname}"
   end
+  def friends
+    friends_array = active_friendships.map { |friendship| friendship.active_friend if friendship.confirmed }
+    friends_array.concat(passive_friendships.map { |friendship| friendship.passive_friend if friendship.confirmed })
+    friends_array.compact
+  end
+
+  def friends_id
+    friends_array = active_friendships.map { |friendship| friendship.active_friend.id }
+    friends_array.concat(passive_friendships.map { |friendship| friendship.passive_friend.id})
+    friends_array.compact
+  end
+
+  def pending_requests_to_users
+    active_friendships.map { |friendship| friendship.active_friend if !friendship.confirmed }.compact
+  end
+
+  def pending_requests_from_users
+    passive_friendships.map { |friendship| friendship.passive_friend if !friendship.confirmed }.compact
+  end
+
+  def send_request(user)
+    active_friends << user
+  end
+
+  def accept_request(user)
+    accept_friendship = passive_friendships.find { |friendship| friendship.passive_friend == user }
+    accept_friendship.confirmed = true
+    accept_friendship.save
+  end
+
+  def friend?(user)
+    friends.include?(user)
+  end
+
+  scope :not_friends, ->(current_user) { where.not(id: current_user.friends_id).where('id != ?', current_user) }
 end

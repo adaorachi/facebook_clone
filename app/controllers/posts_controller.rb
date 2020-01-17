@@ -18,6 +18,8 @@ class PostsController < ApplicationController
   private
 
   def access_actions
+    @users = User.not_friends(current_user).take(10)
+  
     @post = Post.new
     @posts = Post.all
 
