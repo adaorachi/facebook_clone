@@ -5,6 +5,12 @@ class User < ApplicationRecord
   has_many :like_posts, foreign_key: 'user_id', dependent: :destroy
   has_many :liked_posts, through: :like_posts, source: :post
 
+  has_many :active_friendships, class_name: "Friendship", foreign_key: 'passive_friend_id', dependent: :destroy
+  has_many :passive_friendships, class_name: "Friendship", foreign_key: 'active_friend_id', dependent: :destroy
+
+  has_many :active_friends, through: :active_friendships
+  has_many :passive_friends, through: :passive_friendships
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

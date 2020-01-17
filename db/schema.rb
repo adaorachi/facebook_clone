@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_16_171458) do
+ActiveRecord::Schema.define(version: 2020_01_17_152601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,17 @@ ActiveRecord::Schema.define(version: 2020_01_16_171458) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer "active_friend_id"
+    t.integer "passive_friend_id"
+    t.boolean "confirmed", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["active_friend_id"], name: "index_friendships_on_active_friend_id"
+    t.index ["passive_friend_id", "active_friend_id"], name: "index_friendships_on_passive_friend_id_and_active_friend_id", unique: true
+    t.index ["passive_friend_id"], name: "index_friendships_on_passive_friend_id"
   end
 
   create_table "like_posts", force: :cascade do |t|
