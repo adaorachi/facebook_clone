@@ -21,7 +21,7 @@ class PostsController < ApplicationController
     @users = User.not_friends(current_user).take(10)
   
     @post = Post.new
-    @posts = Post.all
+    @posts = Post.posts(current_user)
 
     @comment = Comment.new
     @comments = Comment.all
