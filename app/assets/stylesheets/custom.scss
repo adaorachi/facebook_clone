@@ -460,6 +460,43 @@ body,
   }
 }
 
+.profile-page {
+  .profile-images {
+    position: relative;
+  }
+
+  .profile-banner {
+    border: 1px solid #4267b2;
+    background: #1a2947;
+    height: 220px;
+  }
+
+  .profile-info {
+    position: absolute;
+    bottom: 0;
+
+    > * {
+      margin-right: 1rem;
+    } 
+
+    .profile-pic {
+      border: 3px solid #4267b2;
+      border-radius: 50%;
+    }
+
+    .profile-name {
+      color: #fff;
+      font-size: 1.5rem;
+    }
+
+    .profile-info-but {
+      padding: 0.1rem 0.3rem;
+      font-size: 0.8rem;
+    }
+  }
+}
+
+
 // General
 
 textarea:focus {
