@@ -1,17 +1,17 @@
 <div class="container-fluid newsfeed non-friends-list py-2">
   <div class="row right-column">
 
-    <%= render 'shared/sidebar'%>
-
+  <%= render 'shared/sidebar'%>
+  
     <div class="col-8">
-      <% if @users.count.positive? %>
-        <div class="card">
+      <div class="card">
+        <% if current_user.pending_requests_to_users.count.positive? %>
           <div class="card-header d-flex flex-column">
-            <span>People you may know</span>
+            <span>Friend Requests Sent</span>
             <span><%= link_to 'View Recieved Request', received_request_path %></span>
           </div>
           <ul class="list-group list-group-flush">
-            <% @users.each do |user| %>
+            <% current_user.pending_requests_to_users.each do |user| %>
               <li class="list-group-item">
                 <div class="post-creator">
                 <span><%= link_to gravatar_for(user, size: 55 ), user_path(user), class: "non-friend-image" %></span>
@@ -19,17 +19,20 @@
                     <p class="card-subtitle ">
                       <%= link_to user.name, user_path(user) %>
                     </p>
-                    <%= form_for(current_user.active_friendships.build) do |f| %>
-                      <%= hidden_field_tag :passive_friend_id, user.id %> 
-                      <%= f.button fa_icon("user-plus", text: "Add Friend"), class: "btn btn-sm btn-blue friend-btn" %>
-                    <% end %>
+                      <%= button_tag fa_icon("user-minus", text: "Friend Request Sent"), class: "btn btn-sm btn-grey friend-btn", disabled: true %>
                   </div>
                 </div>
               </li>
             <% end %>
           </ul>
-        </div>
-      <% end %>
+
+          <% else %>
+          <div class="card-header d-flex flex-column">
+            <span>You have no sent request.</span>
+            <span><%= link_to 'View Received Request', received_request_path %></span>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

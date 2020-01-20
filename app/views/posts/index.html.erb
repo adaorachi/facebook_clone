@@ -1,104 +1,6 @@
 <div class="container-fluid newsfeed py-2">
   <div class="row">
-    <div class="col-2">
-      <div class="left-column">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item content mb-3 mt-2">
-            <%= link_to users_path do %>
-              <span><%= gravatar_for(current_user, size:20) %></span>
-              <span><%= name(current_user) %></span>
-            <% end %>
-          </li>
-          <li class="list-group-item content active">
-            <%= link_to users_path do %>
-              <span><%= image_tag("newsfeed.png", :alt => "NewsFeed", :width => '20') %></span> 
-              <span>News Feed</span>  
-            <% end %>       
-          </li>
-          <li class="list-group-item content">
-            <%= link_to users_path do %>
-              <span><%= image_tag("messenger.png", :alt => "messenger", :width => '20') %></span> 
-              <span>Messenger</span>    
-            <% end %>     
-          </li>
-          <li class="list-group-item content">
-            <%= link_to users_path do %>
-              <span><%= image_tag("video.png", :alt => "Video", :width => '20') %></span> 
-              <span>Videos on Watch</span>    
-            <% end %>     
-          </li>
-          <li class="list-group-item subtitle mt-1">
-            Explore   
-          </li>
-          <li class="list-group-item content">
-            <%= link_to users_path do %>
-              <span><%= image_tag("group.png", :alt => "Groups", :width => '20') %></span> 
-              <span>Groups</span>    
-            <% end %>     
-          </li>
-          <li class="list-group-item content">
-            <%= link_to users_path do %>
-              <span><%= image_tag("pages.png", :alt => "Pages", :width => '20') %></span> 
-              <span>Pages</span>    
-            <% end %>     
-          </li>
-          <li class="list-group-item content">
-            <%= link_to users_path do %>
-              <span><%= image_tag("events.png", :alt => "Events", :width => '20') %></span> 
-              <span>Events</span>    
-            <% end %>     
-          </li>
-          <li class="list-group-item content">
-            <%= link_to users_path do %>
-              <span><%= image_tag("friend-list.png", :alt => "Friend List", :width => '20') %></span> 
-              <span>Friend List</span>    
-            <% end %>     
-          </li>
-          <li class="list-group-item content">
-            <%= link_to users_path do %>
-              <span><%= image_tag("memories.png", :alt => "Memories", :width => '20') %></span> 
-              <span>Memories</span>    
-            <% end %>     
-          </li>
-          <li class="list-group-item content">
-            <%= link_to users_path do %>
-              <span><%= image_tag("game.png", :alt => "Games", :width => '20') %></span> 
-              <span>Games</span>    
-            <% end %>     
-          </li>
-          <li class="list-group-item content">
-            <%= link_to users_path do %>
-              <span><%= image_tag("saved.png", :alt => "Saved", :width => '20') %></span> 
-              <span>Saved</span>    
-            <% end %>     
-          </li>
-          <li class="list-group-item content">
-            <%= link_to users_path do %>
-              <span><%= image_tag("jobs.png", :alt => "Jobs", :width => '20') %></span> 
-              <span>Jobs</span>    
-            <% end %>     
-          </li>
-          <li class="list-group-item content">
-            <%= link_to users_path do %>
-              <span><%= image_tag("find-friend.png", :alt => "Find Friend", :width => '20') %></span> 
-              <span>Find Friends</span>    
-            <% end %>     
-          </li>
-          <li class="list-group-item content">
-            <%= link_to users_path do %>
-              <span><%= image_tag("weather.png", :alt => "Weather", :width => '20') %></span> 
-              <span>Weather</span>    
-            <% end %>     
-          </li>
-          <li class="list-group-item content">
-            <%= link_to users_path do %>
-              <span><%= image_tag("notes.png", :alt => "Notes", :width => '20') %></span> 
-              <span>Notes</span>    
-            <% end %>     
-          </li>
-        </ul>
-      </div>
-    </div>
+    <%= render 'shared/sidebar' %>
     <div class="col-6">
       <div class="center-column">
         <div class="card">
@@ -114,97 +16,157 @@
           </div>
         </div>
         <% @posts.each do |post| %>
-          <div class="card post-card my-2">
-            <div class="card-body">
-              <div class="post-creator mb-3">
-                <span><%= link_to gravatar_for(post.user, size: 35 ), user_path(post.user), class: "post-image" %></span>
-                <div class="post-creator-info">
-                  <p class="card-subtitle "><%= link_to name(post.user), user_path(post.user) %></p>
-                  <p class="card-subtitle"><%= distance_of_time_in_words(Time.now, post.created_at) %> ago</p>
+            <div class="card post-card my-2">
+              <div class="card-body">
+                <div class="post-creator mb-3">
+                  <span><%= link_to gravatar_for(post.user, size: 35 ), user_path(post.user), class: "post-image" %></span>
+                  <div class="post-creator-info">
+                    <p class="card-subtitle "><%= link_to name(post.user), user_path(post.user) %></p>
+                    <p class="card-subtitle"><%= distance_of_time_in_words(Time.now, post.created_at) %> ago</p>
+                  </div>
                 </div>
-              </div>
-              <%= content_tag :p, post.body, class: "card-text" %>
-              <div class="liked-users">
-                <ul class="navbar-nav d-flex align-items-center flex-row">
+                <%= content_tag :p, post.body, class: "card-text" %>
+                <div class="liked-users">
+                  <ul class="navbar-nav d-flex align-items-center flex-row">
 
                     <%= render partial: 'like_stats', locals: {post: post} %>
 
-                  <li class="nav-item ml-auto">
-                    <span class="nav-link" title="Me">1 share</span>
-                  </li>
-                  <li class="nav-item ml-2">
-                    <span class="nav-link" title="me"><%= post.liked_by_users.count %> like</span>
-                  </li>
-                </ul>
-              </div>
-              <div class="like-icon my-2">
-                <ul class="navbar-nav d-flex align-items-center justify-content-around flex-row">
-                  <li class="nav-item" id="like-rendered-form">
-                    
-                   <%= render partial: 'like_form', locals: {post: post} %>
+                    <li class="nav-item ml-auto">
+                      <span class="nav-link" title="Me">1 shares</span>
+                    </li>
+                    <li class="nav-item ml-2">
+                      <span class="nav-link" title="me"><%= pluralize(post.liked_by_users.count, 'like')%></span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="like-icon my-2">
+                  <ul class="navbar-nav d-flex align-items-center justify-content-around flex-row">
+                    <li class="nav-item" id="like-rendered-form">
+                      
+                    <%= render partial: 'like_form', locals: {post: post} %>
 
-                  </li>
-                  <li class="nav-item ml-2">
-                    <span class="nav-link">
-                      <button class="like-button">
-                        <%= fa_icon 'comment-alt', type: :regular, class: 'post-icon' %> Comment
-                      </button>
-                    </span>
-                  </li>
-                  <li class="nav-item">
-                    <span class="nav-link">
-                      <button class="like-button">
-                        <%= fa_icon "share", class: 'post-icon' %> Share
-                      </button>
-                    </span>
-                  </li>
-                </ul>
+                    </li>
+                    <li class="nav-item ml-2">
+                      <span class="nav-link">
+                        <button class="like-button">
+                          <%= fa_icon 'comment-alt', type: :regular, class: 'post-icon' %> Comment
+                        </button>
+                      </span>
+                    </li>
+                    <li class="nav-item">
+                      <span class="nav-link">
+                        <button class="like-button">
+                          <%= fa_icon "share", class: 'post-icon' %> Share
+                        </button>
+                      </span>
+                    </li>
+                  </ul>
+                </div>
               </div>
-            </div>
 
-            <div class="show-comments">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item"> <%= link_to "View #{pluralize(post.comments.count, 'comment')}", '#' %></li>
-                <% post.comments.each do |comment| %>
-                  <li class="list-group-item">
-                    <div class="post-creator">
-                      <span><%= link_to gravatar_for(comment.user, size: 35 ), user_path(comment.user), class: "comment-image" %></span>
-                      <div class="post-creator-info">
-                        <p class="card-subtitle ">
-                          <%= link_to name(comment.user), user_path(comment.user) %>
-                          <%= comment.body %>
-                        </p>
-                        <p class="card-subtitle">
-                        <span>Like</span>
-                        <span>Reply</span>
-                        <span><%= distance_of_time_in_words(Time.now, comment.created_at) %> ago</span>
-                        </p>
+              <div class="show-comments">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item"> 
+                    <%= content_tag :span, "View #{pluralize(post.comments.count, 'comment')}", class: 'text-primary' if post.comments.count.positive? %>
+                  </li>
+                  <% post.comments.each do |comment| %>
+                    <li class="list-group-item">
+                      <div class="post-creator">
+                        <span><%= link_to gravatar_for(comment.user, size: 35 ), user_path(comment.user), class: "comment-image" %></span>
+                        <div class="post-creator-info">
+                          <p class="card-subtitle ">
+                            <%= link_to name(comment.user), user_path(comment.user) %>
+                            <%= comment.body %>
+                          </p>
+                          <p class="card-subtitle">
+                          <span>Like</span>
+                          <span>Reply</span>
+                          <span><%= distance_of_time_in_words(Time.now, comment.created_at) %> ago</span>
+                          </p>
+                        </div>
                       </div>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+              <div class="comment-section d-flex p-3">
+                <div class='comment-image'>
+                  <span><%= gravatar_for(current_user, size: 35 ) %></span>
+                </div>
+                <div class="comment-form">
+                  <%= form_for(@comment) do |f| %>
+                    <%= f.hidden_field :post_id, value: post.id %>
+                    <%= f.text_area :body, class: "form-control comment-textarea", placeholder: "Write a comment ..." %>
+                    <div class="comment-button mt-1">
+                      <%= f.submit "Comment", class: "btn btn-primary text-comment-button" %>
                     </div>
-                  </li>
-                <% end %>
-              </ul>
-            </div>
-            <div class="comment-section d-flex p-3">
-              <div class='comment-image'>
-                <span><%= gravatar_for(current_user, size: 35 ) %></span>
-              </div>
-              <div class="comment-form">
-                <%= form_for(@comment) do |f| %>
-                  <%= f.hidden_field :post_id, value: post.id %>
-                  <%= f.text_area :body, class: "form-control comment-textarea", placeholder: "Write a comment ..." %>
-                  <div class="comment-button mt-1">
-                    <%= f.submit "Comment", class: "btn btn-primary text-comment-button" %>
-                  </div>
-                <% end %>
+                  <% end %>
+                </div>
               </div>
             </div>
-          </div>
         <% end %>
       </div>
     </div>
     <div class="col">
-      
+       <div class="right-column">
+        <div class="card mb-3">
+          <div class="card-header d-flex justify-content-between">
+            <span>Friends</span>
+            <span><%= link_to 'See All', friendships_path if current_user.friends.count.positive? %></span>
+          </div>
+          <ul class="list-group list-group-flush">
+            <% if current_user.friends.count.positive? %>
+              <% current_user.friends.each do |friend| %>
+                <li class="list-group-item">
+                  <div class="post-creator">
+                  <span><%= link_to gravatar_for(friend, size: 40 ), user_path(friend), class: "comment-image" %></span>
+                  <div class="post-creator-info">
+                    <p class="card-subtitle ">
+                      <%= link_to friend.name, user_path(friend) %>
+                    </p>
+                    <%= form_for((current_user.active_friendships.find_by(active_friend_id: friend.id) || current_user.passive_friendships.find_by(passive_friend_id: friend.id)), html: { method: :delete }) do |f| %>
+                      <%= hidden_field_tag :active_friend_id, friend.id %>
+                      <%= f.button fa_icon("user-slash", text: "Unfriend"), class: "btn btn-sm btn-danger friend-btn", method: :delete, data: {confirm: 'Are you sure?'} %>
+                    <% end %>
+                  </div>
+                </div>
+                </li>
+              <% end %>
+            <% else %>
+              <li class="list-group-item">
+                You have no friend at the moment! Make new friends
+                <%= link_to 'here', users_path %> 
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <% if @users.count.positive? %>
+          <div class="card">
+            <div class="card-header d-flex justify-content-between">
+              <span>People you may know</span>
+              <span><%= link_to 'See All', users_path if @users.count.positive? %></span>
+            </div>
+            <ul class="list-group list-group-flush">
+              <% @users.each do |user| %>
+                <li class="list-group-item">
+                  <div class="post-creator">
+                  <span><%= link_to gravatar_for(user, size: 40 ), user_path(user), class: "comment-image" %></span>
+                    <div class="post-creator-info">
+                      <p class="card-subtitle ">
+                        <%= link_to user.name, user_path(user) %>
+                      </p>
+                      <%= form_for(current_user.active_friendships.build) do |f| %>
+                        <%= hidden_field_tag :passive_friend_id, user.id %> 
+                        <%= f.button fa_icon("user-plus", text: "Add Friend"), class: "btn btn-sm btn-blue friend-btn" %>
+                      <% end %>
+                    </div>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

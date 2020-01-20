@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   def index
-    @users = User.where('id != ?', current_user)
+    @users = User.not_friends(current_user)
   end
 
   def show

@@ -28,17 +28,28 @@
           <%= link_to "Home", posts_path, class: "nav-link" %>
         </li>
         <li class="nav-item r-border">
-          <%= link_to "Find Friends", user_path(current_user), class: "nav-link" %>
+          <%= link_to "Find Friends", users_path, class: "nav-link" %>
         </li>
         <li class="nav-item r-border">
-          <%= link_to "Create", user_path(current_user), class: "nav-link" %>
+          <%= link_to "Create", posts_path, class: "nav-link" %>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" title="Friend Requests" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link request-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" title="Friend Requests" aria-haspopup="true" aria-expanded="false">
             <%= fa_icon "users", class: "user-icon nav-icon" %> 
+            <% if current_user.pending_requests_from_users.count.positive? %>
+              <span class="badge badge-light request-count"><%= current_user.pending_requests_from_users.count %></span>
+            <% end %>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
+            <ul class="dropdown-item  alert alert-success text-center">
+              <% if current_user.pending_requests_from_users.count.positive? %>
+                <% current_user.pending_requests_from_users.each do |user| %>
+                  <a class="list-group-item list-group-item-action request-sent-text", href="<%= received_request_path %>"><%= user.name %> sent you a friend request</a>
+                <% end %>
+              <% else %>
+                <li class="list-group-item list-group-item-action">You have no friend request</li>
+              <% end %>
+            </ul>
           </div>
         </li>
         <li class="nav-item dropdown">
@@ -73,8 +84,7 @@
             <%= link_to 'Edit Account', edit_user_registration_path, class:"dropdown-item" %>
             <%= link_to 'Settings', '', class:"dropdown-item" %>
             <div class="dropdown-divider"></div>
-            <%= link_to 'Logout', destroy_user_session_path, class: "dropdown-item", method: :delete%>
-            
+            <%= link_to 'Logout', destroy_user_session_path, class: "dropdown-item", method: :delete %>
           </div>
         </li>
       </ul>

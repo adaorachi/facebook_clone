@@ -9,4 +9,7 @@ class Post < ApplicationRecord
   validates :user_id, presence: true
 
   default_scope -> { order(created_at: :desc) }
+
+  scope :posts, ->(current_user) { where(user_id: current_user.friends).or(where('user_id = ?', current_user.id)) }
+
 end
