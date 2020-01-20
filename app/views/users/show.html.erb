@@ -1,0 +1,34 @@
+<div class="container profile-page">
+  <div class="profile-images">
+    <div class="profile-banner">
+    </div>
+
+    <div class="profile-info d-flex align-items-center">
+      <div class="profile-pic">
+        <%= gravatar_for(current_user, size: 160) %>
+      </div>
+      <%= content_tag :div, current_user.name, class: 'profile-name' %>
+      <div class="profile-post">
+        <div class="btn btn-primary profile-info-but">
+          Post <span class="badge badge-light">
+            <%= current_user.posts.count %>
+          </span>
+        </div>
+      </div>
+
+      <div class="profile-friends">
+        <div class="btn btn-primary profile-info-but">
+          Friends <span class="badge badge-light">
+            <%= current_user.friends.count %>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="profile-content">
+    <div class="row">
+      <div class="col-6">
+    </div>
+  </div>
+</div>
