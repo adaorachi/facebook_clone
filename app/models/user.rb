@@ -36,6 +36,7 @@ class User < ApplicationRecord
   def name
     "#{firstname} #{surname}"
   end
+  
   def friends
     friends_array = active_friendships.map { |friendship| friendship.active_friend if friendship.confirmed }
     friends_array.concat(passive_friendships.map { |friendship| friendship.passive_friend if friendship.confirmed })
@@ -60,10 +61,10 @@ class User < ApplicationRecord
     active_friends << user
   end
 
-  def accept_request(user)
-    accept_friendship = passive_friendships.find { |friendship| friendship.passive_friend == user }
-    accept_friendship.confirmed = true
-    accept_friendship.save
+  def accept_request(user_id,friend_id)
+    #accept_friendship = passive_friendships.find { |friendship| friendship.passive_friend == user }
+    #accept_friendship.confirmed = true
+    #accept_friendship.save
   end
 
   def friend?(user)
