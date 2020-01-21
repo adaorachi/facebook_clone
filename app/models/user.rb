@@ -18,10 +18,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :firstname, presence: true, length: { in: 3..100 }
-  validates :surname, presence: true, length: { in: 3..100 }
-  validates :birthdate, presence: true
-  validates :gender, presence: true
+  # validates :firstname, presence: true, length: { in: 3..100 }
+  # validates :surname, presence: true, length: { in: 3..100 }
+  # validates :birthdate, presence: true
+  # validates :gender, presence: true
 
   def like(post)
     liked_posts << post
@@ -72,13 +72,17 @@ class User < ApplicationRecord
     friends.include?(user)
   end
 
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
-      user.firstname = auth.info.name   # assuming the user model has a name
-      # user.image = auth.info.image # assuming the user model has an image
-      # If you are using confirmable and the provider(s) you use validate emails, 
+      user.password = Devise.friendly_token[0,20]
+
+      user.surname = auth.info.name
+      # user.surname = auth.info.last_name
+      # user.gender = auth.extra.raw_info.gender
+      # user.birthdate = auth.info.birthdate
       # uncomment the line below to skip the confirmation emails.
       # user.skip_confirmation!
     end

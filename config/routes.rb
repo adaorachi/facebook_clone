@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-  get 'auth/:provider/callback', to: 'devise/sessions#create'
-  get 'auth/failure', to: redirect('/')
-
+ 
   devise_scope :user do
     get 'signup', to: 'devise/registrations#new', as: :new_user_registration
+   
   end
 
   devise_for :users, skip: [:sessions], controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
@@ -12,8 +11,12 @@ Rails.application.routes.draw do
     post 'signin', to: 'devise/sessions#create', as: :user_session
     delete 'signout', to: 'devise/sessions#destroy', as: :destroy_user_session
   end
- 
-  
+
+  # devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' } do
+  #   get '/auth/:provider/callback' => 'devise/sessions#create'
+  # end
+
+
   root 'static_pages#home'
 
   resources :users do

@@ -125,8 +125,10 @@
                   </div>
                 </li>
               </ul>
-              <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
             <% end %>
+
+            <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
+            
           </div>
         <% elsif controller_name == 'sessions' %>
           <div class="mr-auto">
