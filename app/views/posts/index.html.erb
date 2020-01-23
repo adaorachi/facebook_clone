@@ -112,10 +112,10 @@
         <div class="card mb-3">
           <div class="card-header d-flex justify-content-between">
             <span>Friends</span>
-            <span><%= link_to 'See All', friendships_path if current_user.friends.count.positive? %></span>
+            <span><%= link_to 'See All', friendships_path if user_friend[0] %></span>
           </div>
           <ul class="list-group list-group-flush">
-            <% if current_user.friends.count.positive? %>
+            <% if user_friend[0] %>
               <% current_user.friends.each do |friend| %>
                 <li class="list-group-item">
                   <div class="post-creator">
@@ -124,7 +124,7 @@
                     <p class="card-subtitle ">
                       <%= link_to friend.name, user_path(friend) %>
                     </p>
-                    <%= form_for((current_user.active_friendships.find_by(active_friend_id: friend.id) || current_user.passive_friendships.find_by(passive_friend_id: friend.id)), html: { method: :delete }) do |f| %>
+                    <%= form_for(active_friendship(friend.id), html: { method: :delete }) do |f| %>
                       <%= hidden_field_tag :active_friend_id, friend.id %>
                       <%= f.button fa_icon("user-slash", text: "Unfriend"), class: "btn btn-sm btn-danger friend-btn", method: :delete, data: {confirm: 'Are you sure?'} %>
                     <% end %>
@@ -140,11 +140,11 @@
             <% end %>
           </ul>
         </div>
-        <% if @users.count.positive? %>
+        <% if all_user_non_friend[0] %>
           <div class="card">
             <div class="card-header d-flex justify-content-between">
               <span>People you may know</span>
-              <span><%= link_to 'See All', users_path if @users.count.positive? %></span>
+              <span><%= link_to 'See All', users_path if all_user_non_friend[0] %></span>
             </div>
             <ul class="list-group list-group-flush">
               <% @users.each do |user| %>
@@ -155,7 +155,7 @@
                       <p class="card-subtitle ">
                         <%= link_to user.name, user_path(user) %>
                       </p>
-                      <%= form_for(current_user.active_friendships.build) do |f| %>
+                      <%= form_for(@active_friendship) do |f| %>
                         <%= hidden_field_tag :passive_friend_id, user.id %> 
                         <%= f.button fa_icon("user-plus", text: "Add Friend"), class: "btn btn-sm btn-blue friend-btn" %>
                       <% end %>

@@ -4,7 +4,7 @@
     <%= render 'shared/sidebar'%>
 
     <div class="col-8">
-      <% if @users.count.positive? %>
+      <% if all_user_non_friend[0] %>
         <div class="card">
           <div class="card-header d-flex flex-column">
             <span>People you may know</span>
@@ -19,7 +19,7 @@
                     <p class="card-subtitle ">
                       <%= link_to user.name, user_path(user) %>
                     </p>
-                    <%= form_for(current_user.active_friendships.build) do |f| %>
+                    <%= form_for(@active_friendship) do |f| %>
                       <%= hidden_field_tag :passive_friend_id, user.id %> 
                       <%= f.button fa_icon("user-plus", text: "Add Friend"), class: "btn btn-sm btn-blue friend-btn" %>
                     <% end %>

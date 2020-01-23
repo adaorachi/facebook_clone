@@ -36,13 +36,13 @@
         <li class="nav-item dropdown">
           <a class="nav-link request-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" title="Friend Requests" aria-haspopup="true" aria-expanded="false">
             <%= fa_icon "users", class: "user-icon nav-icon" %> 
-            <% if current_user.pending_requests_from_users.count.positive? %>
-              <span class="badge badge-light request-count"><%= current_user.pending_requests_from_users.count %></span>
+            <% if incoming_requests[0] %>
+              <span class="badge badge-light request-count"><%= incoming_requests[1] %></span>
             <% end %>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <ul class="dropdown-item  alert alert-success text-center">
-              <% if current_user.pending_requests_from_users.count.positive? %>
+              <% if incoming_requests[0] %>
                 <% current_user.pending_requests_from_users.each do |user| %>
                   <a class="list-group-item list-group-item-action request-sent-text", href="<%= received_request_path %>"><%= user.name %> sent you a friend request</a>
                 <% end %>

@@ -5,7 +5,7 @@
   
     <div class="col-8">
       <div class="card">
-        <% if current_user.pending_requests_to_users.count.positive? %>
+        <% if outgoing_requests[0] %>
           <div class="card-header d-flex flex-column">
             <span>Friend Requests Sent</span>
             <span><%= link_to 'View Recieved Request', received_request_path %></span>
