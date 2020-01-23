@@ -9,6 +9,12 @@
     </div>
     </div>
     <div class="col-6">
+      <div class="facebook-login">
+        <%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-sm facebook-button mb-4" do %>
+          <%= fa_icon("facebook-square", text: "Sign in with Facebook", type: :brand, size: '1x') %>
+        <% end %>
+      </div>
+
       <div class="signup-form">
         <h2>Create an Account</h2>
         <h6>It's quick and easy.</h6>

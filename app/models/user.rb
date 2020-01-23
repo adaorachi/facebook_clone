@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  devise :omniauthable, omniauth_providers: %i[facebook]
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -13,15 +12,18 @@ class User < ApplicationRecord
   has_many :active_friends, through: :active_friendships
   has_many :passive_friends, through: :passive_friendships
 
+
+  devise :omniauthable, omniauth_providers: %i[facebook]
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  # validates :firstname, presence: true, length: { in: 3..100 }
-  # validates :surname, presence: true, length: { in: 3..100 }
-  # validates :birthdate, presence: true
-  # validates :gender, presence: true
+  validates :firstname, presence: true, length: { in: 3..100 }
+  validates :surname, presence: true, length: { in: 3..100 }
+  validates :birthdate, presence: { message: "(Date of Birth) must be entered" } 
+  # validates :gender, presence: { message: "must be selected" } 
 
   def like(post)
     liked_posts << post
@@ -38,6 +40,7 @@ class User < ApplicationRecord
   def name
     "#{firstname} #{surname}"
   end
+
   def friends
     friends_array = active_friendships.map { |friendship| friendship.active_friend if friendship.confirmed }
     friends_array.concat(passive_friendships.map { |friendship| friendship.passive_friend if friendship.confirmed })
@@ -74,19 +77,19 @@ class User < ApplicationRecord
 
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0, 20]
-      user.password = Devise.friendly_token[0,20]
+  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    user.email = auth.info.email
+    user.password = Devise.friendly_token[0, 20]
 
-      user.surname = auth.info.name
-      # user.surname = auth.info.last_name
-      # user.gender = auth.extra.raw_info.gender
-      # user.birthdate = auth.info.birthdate
-      # uncomment the line below to skip the confirmation emails.
-      # user.skip_confirmation!
-    end
+    user.firstname = auth.info.first_name
+    user.surname = auth.info.last_name
+    # user.gender = auth.extra.raw_info.gender
+    user.birthdate = auth.extra.raw_info.birthday
+    user.gender = auth.info.image
+    # uncomment the line below to skip the confirmation emails.
+    # user.skip_confirmation!
   end
+end
 
   def self.new_with_session(params, session)
     super.tap do |user|

@@ -12,11 +12,6 @@ Rails.application.routes.draw do
     delete 'signout', to: 'devise/sessions#destroy', as: :destroy_user_session
   end
 
-  # devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' } do
-  #   get '/auth/:provider/callback' => 'devise/sessions#create'
-  # end
-
-
   root 'static_pages#home'
 
   resources :users do
