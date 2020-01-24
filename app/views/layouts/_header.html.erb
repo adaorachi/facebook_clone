@@ -20,7 +20,7 @@
       <ul class="navbar-nav mr-auto">
         <li class="nav-item gravatar-list r-border"> 
           <%= link_to user_path(current_user), class: "nav-link gravatar-link" do %>
-            <%= content_tag :span, gravatar_for(current_user, size:23) %>
+            <%= content_tag :span, user_image(current_user, 23) %>
             <%= content_tag :span, current_user.firstname, class: "username" %>
           <% end %>
         </li>

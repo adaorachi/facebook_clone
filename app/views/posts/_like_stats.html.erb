@@ -6,7 +6,7 @@
     <% post.liked_by_users.each do |user| %>
       <a class="dropdown-item" href="<%= user_path(user) %>">
         <div class="post-creator">
-        <span><%= gravatar_for(user, size: 40 ) %></span>
+        <span><%= user_image(user, 40) %></span>
         <div class="post-creator-info">
           <p class="card-subtitle ">
             <%= user.name %>

@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  after_create :add_user_image
+  # before_create :add_user_image, :if => :new_record?
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -24,7 +24,17 @@ class User < ApplicationRecord
   validates :firstname, presence: true, length: { in: 3..100 }
   validates :surname, presence: true, length: { in: 3..100 }
   validates :birthdate, presence: { message: "(Date of Birth) must be entered" } 
-  # validates :gender, presence: { message: "must be selected" } 
+  validates :gender, presence: { message: "must be selected" } 
+
+  def name
+    "#{firstname} #{surname}"
+  end
+
+  def self.user_birthdate(b_date)
+    date = b_date.split('/')
+    date = "#{date[2]}-#{date[0]}-#{date[1]}"
+    date
+  end
 
   def like(post)
     liked_posts << post
@@ -36,10 +46,6 @@ class User < ApplicationRecord
 
   def liked?(post)
     liked_posts.include?(post)
-  end
-
-  def name
-    "#{firstname} #{surname}"
   end
   
   def friends
@@ -68,31 +74,6 @@ class User < ApplicationRecord
     friends.include?(user)
   end
 
-
-  def self.from_omniauth(auth)
-  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-    user.email = auth.info.email
-    user.password = Devise.friendly_token[0, 20]
-
-    user.firstname = auth.info.first_name
-    user.surname = auth.info.last_name
-    # user.gender = auth.extra.raw_info.gender
-    user.birthdate = auth.extra.raw_info.birthday
-    user.gender = auth.info.image
-    # uncomment the line below to skip the confirmation emails.
-    # user.skip_confirmation!
-  end
-end
-
-  def self.new_with_session(params, session)
-    super.tap do |user|
-      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
-      end
-    end
-  end
-
-  scope :not_friends, ->(current_user) { where.not(id: current_user.friends_id).where('id != ?', current_user) }
   def create_reciprocal_friendship(friend_id)
     friendship1 = passive_friendships.find { |friendship| friendship.passive_friend_id == friend_id }
     friendship1.update_attributes(confirmed: true)
@@ -107,16 +88,36 @@ end
   end
 
   scope :not_friends, ->(current_user) { where.not(id: current_user.friends_and_requests_id).where('id != ?', current_user) }
+
+
+
+  def self.from_omniauth(auth)
+  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    user.email = auth.info.email
+    user.password = Devise.friendly_token[0, 20]
+    user.firstname = auth.info.first_name
+    user.surname = auth.info.last_name
+    user.gender = auth.extra.raw_info.gender
+    user.birthdate = user_birthdate(auth.extra.raw_info.birthday)
+    user.image = auth.info.image
+    # uncomment the line below to skip the confirmation emails.
+    # user.skip_confirmation!
+  end
+end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
+    end
+  end
   
-  private
-  def add_user_image
+  
+
+  def self.add_user_image
     gravatar_id = Digest::MD5::hexdigest(self.email.downcase)
-    gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=120"
+    gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=200"
     self.update_attributes(image: gravatar_url)
   end
-
-  # gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
-  # gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=120"
-  # gravatar_url
-
 end

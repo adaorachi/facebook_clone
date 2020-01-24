@@ -3,7 +3,7 @@
     <div class="profile-banner">
       <div class="profile-info d-flex align-items-center">
         <div class="profile-pic">
-          <%= gravatar_for(@user, size: 140) %>
+          <%= user_image(@user, 140) %>
         </div>
         <%= content_tag :div, @user.name, class: 'profile-name' %>
         <div class="friend-button">
@@ -78,7 +78,7 @@
             <div class="user-friend_profiles non-friends-list">
               <% @user.friends.each do |friend| %>
                 <div class="user-friend-pro">
-                  <p><%= gravatar_for(friend, size: 100) %></p>
+                  <p><%= user_image(friend, 100) %></p>
                   <%= friend.name %>
                 </div>
               <% end %>
@@ -96,7 +96,7 @@
               <div class="card post-card my-2">
                 <div class="card-body">
                   <div class="post-creator mb-3">
-                    <span><%= link_to gravatar_for(post.user, size: 35 ), user_path(post.user), class: "post-image" %></span>
+                    <span><%= link_to user_image(post.user, 35), user_path(post.user), class: "post-image" %></span>
                     <div class="post-creator-info">
                       <p class="card-subtitle "><%= link_to name(post.user), user_path(post.user) %></p>
                       <p class="card-subtitle"><%= distance_of_time_in_words(Time.now, post.created_at) %> ago</p>

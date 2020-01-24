@@ -14,7 +14,7 @@
             <% @users.each do |user| %>
               <li class="list-group-item">
                 <div class="post-creator">
-                <span><%= link_to gravatar_for(user, size: 55 ), user_path(user), class: "non-friend-image" %></span>
+                <span><%= link_to user_image(user, 55), user_path(user), class: "non-friend-image" %></span>
                   <div class="post-creator-info d-flex justify-content-between align-items-center">
                     <p class="card-subtitle ">
                       <%= link_to user.name, user_path(user) %>
