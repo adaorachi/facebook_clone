@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  # before_create :add_user_image, :if => :new_record?
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -100,8 +99,6 @@ class User < ApplicationRecord
     user.gender = auth.extra.raw_info.gender
     user.birthdate = user_birthdate(auth.extra.raw_info.birthday)
     user.image = auth.info.image
-    # uncomment the line below to skip the confirmation emails.
-    # user.skip_confirmation!
   end
 end
 
@@ -112,12 +109,5 @@ end
       end
     end
   end
-  
-  
 
-  def self.add_user_image
-    gravatar_id = Digest::MD5::hexdigest(self.email.downcase)
-    gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=200"
-    self.update_attributes(image: gravatar_url)
-  end
 end
