@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  after_create :add_user_image
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -40,11 +41,7 @@ class User < ApplicationRecord
   def name
     "#{firstname} #{surname}"
   end
-<<<<<<< HEAD
-
-=======
   
->>>>>>> friendship2
   def friends
     friends_array = active_friendships.map { |friendship| friendship.active_friend if friendship.confirmed }
     friends_array.compact
@@ -71,7 +68,6 @@ class User < ApplicationRecord
     friends.include?(user)
   end
 
-<<<<<<< HEAD
 
   def self.from_omniauth(auth)
   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -97,7 +93,6 @@ end
   end
 
   scope :not_friends, ->(current_user) { where.not(id: current_user.friends_id).where('id != ?', current_user) }
-=======
   def create_reciprocal_friendship(friend_id)
     friendship1 = passive_friendships.find { |friendship| friendship.passive_friend_id == friend_id }
     friendship1.update_attributes(confirmed: true)
@@ -112,5 +107,16 @@ end
   end
 
   scope :not_friends, ->(current_user) { where.not(id: current_user.friends_and_requests_id).where('id != ?', current_user) }
->>>>>>> friendship2
+  
+  private
+  def add_user_image
+    gravatar_id = Digest::MD5::hexdigest(self.email.downcase)
+    gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=120"
+    self.update_attributes(image: gravatar_url)
+  end
+
+  # gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
+  # gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=120"
+  # gravatar_url
+
 end
