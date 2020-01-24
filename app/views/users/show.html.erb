@@ -8,9 +8,9 @@
         <%= content_tag :div, @user.name, class: 'profile-name' %>
         <div class="friend-button">
           <% if @user != current_user %>
-            <% if current_user.pending_requests_to_users.include?(@user) %>
+            <% if include_outgoing_requests(@user) %>
               <%= button_tag fa_icon("user-minus", text: "Friend Request Sent"), class: "btn btn-sm btn-secondary friend-btn", disabled: true %>
-            <% elsif current_user.pending_requests_from_users.include?(@user) %>
+            <% elsif include_incoming_requests(@user) %>
               <%= form_for(passive_friendship(@user)) do |f| %>
                 <%= f.button fa_icon("user-plus", text: "Confirm Request"), name: 'accept_request', class: "btn btn-sm btn-primary friend-btn" %>
               <% end %>
