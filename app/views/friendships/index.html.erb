@@ -5,7 +5,7 @@
 
     <div class="col-8">
       <div class="card">
-        <% if current_user.friends.count.positive? %>
+        <% if user_friend(current_user)[0] %>
           <div class="card-header d-flex flex-column">
             <span>
               <strong>Friend List </strong>
@@ -21,7 +21,7 @@
                     <p class="card-subtitle ">
                       <%= link_to friend.name, user_path(friend) %>
                     </p>
-                    <%= form_for((current_user.active_friendships.find_by(active_friend_id: friend.id) || current_user.passive_friendships.find_by(passive_friend_id: friend.id)), html: { method: :delete }) do |f| %>
+                    <%= form_for(active_friendship(friend.id), html: { method: :delete }) do |f| %>
                       <%= hidden_field_tag :active_friend_id, friend.id %>
                       <%= f.button fa_icon("user-slash", text: "Unfriend"), class: "btn btn-sm btn-danger friend-btn", method: :delete, data: {confirm: 'Are you sure?'} %>
                     <% end %>

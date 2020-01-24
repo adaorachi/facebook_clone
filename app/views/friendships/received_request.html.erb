@@ -5,10 +5,10 @@
 
     <div class="col-8">
       <div class="card">
-        <% if current_user.pending_requests_from_users.count.positive? %>
+        <% if incoming_requests[0] %>
           <div class="card-header d-flex flex-column">
             <span>
-              <strong>Respond to Your <%= pluralize(current_user.pending_requests_from_users.count, 'Friend Request')%> </strong>
+              <strong>Respond to Your <%= pluralize(incoming_requests[1], 'Friend Request')%> </strong>
               </span>
             <span><%= link_to 'View Sent Request', sent_request_path %></span>
           </div>
@@ -22,8 +22,7 @@
                       <%= link_to user.name, user_path(user) %>
                     </p>
                     
-                    <%= form_for(current_user.passive_friendships.find_by(passive_friend_id: user.id)) do |f| %>
-                      <%= hidden_field_tag :passive_friend_id, user.id %> 
+                    <%= form_for(passive_friendship(user.id)) do |f| %>
                       <%= f.button "Confirm", name: 'accept_request', class: "btn btn-sm btn-blue friend-btn" %>
                       <%= f.button "Decline Request", name: 'decline_request', class: "btn btn-sm btn-secondary friend-btn", data: {confirm: 'Are you sure?'} %>
                     <% end %>
