@@ -112,10 +112,10 @@
         <div class="card mb-3">
           <div class="card-header d-flex justify-content-between">
             <span>Friends</span>
-            <span><%= link_to 'See All', friendships_path if user_friend[0] %></span>
+            <span><%= link_to 'See All', friendships_path if user_friend(current_user)[0] %></span>
           </div>
           <ul class="list-group list-group-flush">
-            <% if user_friend[0] %>
+            <% if user_friend(current_user)[0] %>
               <% current_user.friends.each do |friend| %>
                 <li class="list-group-item">
                   <div class="post-creator">

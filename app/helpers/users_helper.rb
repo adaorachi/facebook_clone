@@ -19,9 +19,10 @@ module UsersHelper
     [is_postive, count]
   end
 
-  def user_friend
-    is_positive = current_user.friends.count.positive?
-    count = current_user.friends.count
+  def user_friend(user)
+    is_positive = user.friends.count.positive?
+    count = user.friends.count
     [is_positive, count]
   end
+  
 end

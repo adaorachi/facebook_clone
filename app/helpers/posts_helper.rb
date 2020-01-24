@@ -9,4 +9,8 @@ module PostsHelper
     end
     liked
   end
+
+  def user_posts
+    @posts.count.positive?
+  end
 end
