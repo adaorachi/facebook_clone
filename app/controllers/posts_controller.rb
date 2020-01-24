@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!
   before_action :access_actions, only: [:index, :create]
 
   def index
@@ -8,7 +7,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      redirect_to posts_path
+      redirect_to(request.referer)
     else
       flash.now[:notice] = 'Write a post!'
       render :index
@@ -24,7 +23,7 @@ class PostsController < ApplicationController
     @posts = Post.posts(current_user)
 
     @comment = Comment.new
-    @comments = Comment.all
+    @active_friendship = current_user.active_friendships.build
   end
 
   def post_params

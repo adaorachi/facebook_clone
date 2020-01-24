@@ -460,15 +460,21 @@ body,
   }
 }
 
+// Profile page
+
 .profile-page {
   .profile-images {
     position: relative;
   }
 
   .profile-banner {
-    border: 1px solid #4267b2;
     background: #1a2947;
     height: 220px;
+  }
+
+  .banner-lower {
+    width: 100%;
+    background: #fff;
   }
 
   .profile-info {
@@ -492,6 +498,19 @@ body,
     .profile-info-but {
       padding: 0.1rem 0.3rem;
       font-size: 0.8rem;
+    }
+  }
+  
+  .user-friend_profiles {
+    display: flex;
+
+    .user-friend-pro {
+      flex-basis: 33%;
+      width: 33%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
   }
 }

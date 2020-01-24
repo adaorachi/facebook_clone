@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new
     @comment = current_user.comments.build(comment_params)
     if @comment.save
-      redirect_to posts_path
+      redirect_to(request.referer)
     else
       render '/posts'
     end

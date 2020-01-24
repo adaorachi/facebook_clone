@@ -1,0 +1,135 @@
+<div class="container profile-page">
+  <div class="profile-images">
+    <div class="profile-banner">
+      <div class="profile-info d-flex align-items-center">
+        <div class="profile-pic">
+          <%= gravatar_for(@user, size: 140) %>
+        </div>
+        <%= content_tag :div, @user.name, class: 'profile-name' %>
+        <div class="friend-button">
+          <% if @user != current_user %>
+            <% if include_outgoing_requests(@user) %>
+              <%= button_tag fa_icon("user-minus", text: "Friend Request Sent"), class: "btn btn-sm btn-secondary friend-btn", disabled: true %>
+            <% elsif include_incoming_requests(@user) %>
+              <%= form_for(passive_friendship(@user)) do |f| %>
+                <%= f.button fa_icon("user-plus", text: "Confirm Request"), name: 'accept_request', class: "btn btn-sm btn-primary friend-btn" %>
+              <% end %>
+            <% elsif current_user.friend?(@user) %>
+              <%= form_for(active_friendship(@user), html: { method: :delete }) do |f| %>
+                <%= hidden_field_tag :active_friend_id, @user.id %>
+                <%= f.button fa_icon("user-slash", text: "Unfriend"), class: "btn btn-sm btn-danger friend-btn", method: :delete, data: {confirm: 'Are you sure?'} %>
+              <% end %>
+            <% else %>
+              <%= form_for(@active_friendship) do |f| %>
+                <%= hidden_field_tag :passive_friend_id, @user.id %> 
+                <%= f.button fa_icon("user-plus", text: "Add Friend"), class: "btn btn-sm btn-primary friend-btn" %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="banner-lower">
+      <ul class="list-group list-group-horizontal-md justify-content-end">
+        <li class="list-group-item">
+         Post <span class="badge badge-primary">
+            <%= @user.posts.count %>
+          </span>
+        </li>
+        <li class="list-group-item">
+         Friends <span class="badge badge-primary">
+            <%= @user.friends.count %>
+          </span>
+        </li>
+        
+      </ul>
+
+      
+    </div>
+  </div>
+
+  <div class="profile-content right-column my-4">
+    <div class="row">
+      <div class="col-5">
+        <div class="card ">
+          <div class="card-body text-center">
+            <h5 class="card-title">Info</h5>
+            <p class="card-text">Add a short bio to tell people more about yourself.</p>
+            <a href="#" class="text-center">Add bio</a>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Email: </strong> <%= @user.email%></li>
+            <li class="list-group-item"><strong>Gender: </strong> <%= @user.gender.capitalize %></li>
+            <li class="list-group-item"><strong>Birthdate: </strong> <%= @user.birthdate.strftime("%B %d") %></li>
+            <li class="list-group-item"><strong>Joined since: </strong> <%= @user.created_at.strftime("%B %d, %Y") %></li>
+          </ul>
+        </div>
+
+        <div class="card mt-4">
+          <h6 class="card-header">
+            <%= content_tag :div do %>
+              <span><%= image_tag("friend-list.png", :alt => "Friend List", :width => '20') %></span>
+              <span>Friend List <%= user_friend(@user)[1] if user_friend(@user)[0] %> </span>
+              <span class="mr-auto"><%= link_to 'Find Friends', users_path if user_friend(@user)[0] %></span>    
+            <% end %>    
+          </h6>
+          <div class="card-body">
+            <%  if user_friend(@user)[0] %>
+            <div class="user-friend_profiles non-friends-list">
+              <% @user.friends.each do |friend| %>
+                <div class="user-friend-pro">
+                  <p><%= gravatar_for(friend, size: 100) %></p>
+                  <%= friend.name %>
+                </div>
+              <% end %>
+              </div>
+            <% else %>
+              <p class="text-center">You have no friend</p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-7">
+        <% if user_posts %>
+          <% @posts.each do |post| %>
+              <div class="card post-card my-2">
+                <div class="card-body">
+                  <div class="post-creator mb-3">
+                    <span><%= link_to gravatar_for(post.user, size: 35 ), user_path(post.user), class: "post-image" %></span>
+                    <div class="post-creator-info">
+                      <p class="card-subtitle "><%= link_to name(post.user), user_path(post.user) %></p>
+                      <p class="card-subtitle"><%= distance_of_time_in_words(Time.now, post.created_at) %> ago</p>
+                    </div>
+                  </div>
+                  <%= content_tag :p, post.body, class: "card-text" %>
+                  <div class="liked-users">
+                    <ul class="navbar-nav d-flex align-items-center flex-row">
+
+                      <%= render partial: 'posts/like_stats', locals: {post: post} %>
+
+                      <li class="nav-item ml-auto">
+                        <span class="nav-link" title="Me">1 shares</span>
+                      </li>
+                      <li class="nav-item ml-2">
+                        <span class="nav-link" title="me"><%= pluralize(post.liked_by_users.count, 'like')%></span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+          <% end %>
+        <% else %>
+          <div class="card text-center py-3">
+            <% if @user == current_user %>
+              <h2>You have no post.</h2>
+              <%= link_to "Click here to write you first post", posts_path %>
+            <% else %>
+              <h2><%= @user.name %> has no post.</h2>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

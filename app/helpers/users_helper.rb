@@ -12,4 +12,17 @@ module UsersHelper
   def name(user)
     "#{user.firstname} #{user.surname}"
   end
+
+  def all_user_non_friend
+    is_postive = @users.count.positive?
+    count = @users.count
+    [is_postive, count]
+  end
+
+  def user_friend(user)
+    is_positive = user.friends.count.positive?
+    count = user.friends.count
+    [is_positive, count]
+  end
+  
 end

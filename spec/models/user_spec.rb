@@ -14,5 +14,8 @@ RSpec.describe User, type: :model do
 
   context 'Associations' do
     it { should have_many(:posts) }
+    it { should have_many(:comments) }
+    it { should have_many(:like_posts).with_foreign_key('user_id').dependent(:destroy) }
+    it { should have_many(:liked_posts).through(:like_posts) }
   end
 end
