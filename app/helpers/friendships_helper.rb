@@ -18,4 +18,12 @@ module FriendshipsHelper
     count = current_user.pending_requests_to_users.count
     [is_positive, count]
   end
+
+  def include_outgoing_requests(user)
+    current_user.pending_requests_to_users.include?(user)
+  end
+
+  def include_incoming_requests(user)
+    current_user.pending_requests_from_users.include?(user)
+  end
 end
