@@ -339,24 +339,36 @@ body,
   .post-creator {
     display: flex;
     align-items: center;
-  }
 
-  .post-creator-info {
-    margin-left: 0.5rem;
+    .post-creator-info {
+      margin-left: 0.5rem;
 
-    .card-subtitle {
-      margin-top: 0;
+      .card-subtitle {
+        margin-top: 0;
+      }
+
+      .card-subtitle:nth-child(1) a {
+        color: #4267b2;
+        font-size: 0.9rem;
+        font-weight: bold;
+      }
+
+      .card-subtitle:nth-child(2){
+        color: #999;
+        font-size: 0.75rem;
+      }
     }
+    .edit-delete-btn {
+      padding: 0;
+      background: transparent;
+      border: none;
+      line-height: 0;
+      outline: 0;
 
-    .card-subtitle:nth-child(1) a {
-      color: #4267b2;
-      font-size: 0.9rem;
-      font-weight: bold;
-    }
-
-    .card-subtitle:nth-child(2){
-      color: #999;
-      font-size: 0.75rem;
+      i {
+        font-size: 1.2rem;
+        margin: 0 0.4rem;
+      }
     }
   }
 

@@ -13,4 +13,8 @@ module PostsHelper
   def user_posts
     @posts.count.positive?
   end
+
+  def user_post(post_id)
+    current_user.posts.find_by(id: post_id)
+  end
 end

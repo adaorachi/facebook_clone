@@ -14,6 +14,13 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    user_post = Post.find(params[:id])
+    user_post.destroy
+    flash[:notice] = 'Post deleted!'
+    redirect_to(request.referer)
+  end
+
   private
 
   def access_actions
