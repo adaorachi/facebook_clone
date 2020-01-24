@@ -48,10 +48,10 @@
     </div>
   </div>
 
-  <div class="profile-content my-4">
+  <div class="profile-content right-column my-4">
     <div class="row">
       <div class="col-5">
-        <div class="card">
+        <div class="card ">
           <div class="card-body text-center">
             <h5 class="card-title">Info</h5>
             <p class="card-text">Add a short bio to tell people more about yourself.</p>
@@ -91,7 +91,6 @@
       </div>
 
       <div class="col-7">
-        <div class="right-column">
         <% if user_posts %>
           <% @posts.each do |post| %>
               <div class="card post-card my-2">
@@ -130,7 +129,6 @@
             <% end %>
           </div>
         <% end %>
-        </div>
       </div>
     </div>
   </div>
