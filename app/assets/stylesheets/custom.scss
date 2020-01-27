@@ -517,7 +517,7 @@ body,
   }
 
   .profile-banner {
-    background: #1a2947 url("banner.jpg") no-repeat center center;
+    background: #1a2947 asset-url("banner.jpg") no-repeat center center;
     height: 220px;
   }
 
