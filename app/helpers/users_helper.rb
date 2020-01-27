@@ -19,7 +19,7 @@ module UsersHelper
   end
 
   def user_birthdate(user)
-    user.bithdate ? user.birthdate.strftime("%B %d") : 'Unknown'
+    user.birthdate ? user.birthdate.strftime("%B %d") : 'Unknown'
   end
 
   def username(user)
