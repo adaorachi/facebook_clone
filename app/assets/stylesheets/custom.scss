@@ -486,7 +486,7 @@ body,
     } 
 
     .profile-pic {
-      border: 3px solid #4267b2;
+      border: 3px solid #fff;
       border-radius: 50%;
     }
 
@@ -535,6 +535,16 @@ textarea:focus {
 
 .gravatar {
   border-radius: 50%;
+}
+
+.facebook-login {
+  text-align: center;
+}
+
+.facebook-button {
+  background-color: #3b5998!important;
+  color: #fff!important;
+  border: none;
 }
 
 .field_with_errors {

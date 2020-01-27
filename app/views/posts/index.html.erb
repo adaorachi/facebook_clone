@@ -8,7 +8,7 @@
           <div class="card-body">
             <%= form_for(@post) do |f| %>
               <div class="text-area-content">
-                <%= content_tag :div, gravatar_for(current_user, size: 40 ), class: "text-area-image" %>
+                <%= content_tag :div, user_image(current_user, 40), class: "text-area-image" %>
                 <%= f.text_area :body, class: "form-control", placeholder: "What's on your mind, #{current_user.firstname}?" %>
               </div>
               <%= f.submit "Post", class: "btn btn-primary text-post-button" %>
@@ -20,7 +20,7 @@
               <div class="card post-card my-2">
                 <div class="card-body">
                   <div class="post-creator mb-3">
-                    <span><%= link_to gravatar_for(post.user, size: 35 ), user_path(post.user), class: "post-image" %></span>
+                    <span><%= link_to user_image(post.user, 35), user_path(post.user), class: "post-image" %></span>
                     <div class="post-creator-info">
                       <p class="card-subtitle "><%= link_to name(post.user), user_path(post.user) %></p>
                       <p class="card-subtitle"><%= distance_of_time_in_words(Time.now, post.created_at) %> ago</p>
@@ -73,7 +73,7 @@
                     <% post.comments.each do |comment| %>
                       <li class="list-group-item">
                         <div class="post-creator">
-                          <span><%= link_to gravatar_for(comment.user, size: 35 ), user_path(comment.user), class: "comment-image" %></span>
+                          <span><%= link_to user_image(comment.user, 35), user_path(comment.user), class: "comment-image" %></span>
                           <div class="post-creator-info">
                             <p class="card-subtitle ">
                               <%= link_to name(comment.user), user_path(comment.user) %>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="comment-section d-flex p-3">
                   <div class='comment-image'>
-                    <span><%= gravatar_for(current_user, size: 35 ) %></span>
+                    <span><%= user_image(current_user, 35) %></span>
                   </div>
                   <div class="comment-form">
                     <%= form_for(@comment) do |f| %>
@@ -109,7 +109,9 @@
         <% else %>
           <div class="card text-center py-3 my-3">
             <h2>You have no post.</h2>
-            <p> Start a post by writing you thought. </p>
+            
+            <p> Start a post by writing your thought. </p>
+
           </div>
         <% end %>
       </div>
@@ -126,7 +128,7 @@
               <% current_user.friends.each do |friend| %>
                 <li class="list-group-item">
                   <div class="post-creator">
-                  <span><%= link_to gravatar_for(friend, size: 40 ), user_path(friend), class: "comment-image" %></span>
+                  <span><%= link_to user_image(friend, 40), user_path(friend), class: "comment-image" %></span>
                   <div class="post-creator-info">
                     <p class="card-subtitle ">
                       <%= link_to friend.name, user_path(friend) %>
@@ -157,7 +159,7 @@
               <% @users.each do |user| %>
                 <li class="list-group-item">
                   <div class="post-creator">
-                  <span><%= link_to gravatar_for(user, size: 40 ), user_path(user), class: "comment-image" %></span>
+                  <span><%= link_to user_image(user, 40), user_path(user), class: "comment-image" %></span>
                     <div class="post-creator-info">
                       <p class="card-subtitle ">
                         <%= link_to user.name, user_path(user) %>

@@ -3,7 +3,7 @@
     <ul class="list-group list-group-flush">
       <li class="list-group-item content mb-3 mt-2">
         <%= link_to user_path(current_user) do %>
-          <span><%= gravatar_for(current_user, size:20) %></span>
+          <span><%= user_image(current_user, 20) %></span>
           <span><%= name(current_user) %></span>
         <% end %>
       </li>

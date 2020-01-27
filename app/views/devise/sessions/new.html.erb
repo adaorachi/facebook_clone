@@ -1,7 +1,11 @@
 <div class="login-form">
   <div class="login-form-content">
     <h2>Log in to Facebook</h2>
-
+    <div class="facebook-login">
+      <%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-sm facebook-button mb-4" do %>
+        <%= fa_icon("facebook-square", text: "Sign in with Facebook", type: :brand, size: '1x') %>
+      <% end %>
+    </div>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="form-group">
         <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email Address", class: "form-control" %>
