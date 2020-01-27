@@ -14,6 +14,15 @@ class PostsController < ApplicationController
     end
   end
 
+  def update
+    user_post = Post.find(params[:id])
+    if user_post.update(post_params)
+      redirect_to(request.referer)
+    else
+      render :index
+    end
+  end
+
   def destroy
     user_post = Post.find(params[:id])
     user_post.destroy
@@ -34,6 +43,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:body)
+    params.require(:post).permit(:body, :user_id, post_image: [])
   end
 end

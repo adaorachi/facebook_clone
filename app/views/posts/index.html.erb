@@ -4,18 +4,45 @@
     <div class="col-6">
       <div class="center-column">
         <div class="card">
-          <h5 class="card-header">Create Post</h5>
-          <div class="card-body">
-            <%= form_for(@post) do |f| %>
-              <div class="text-area-content">
-                <%= content_tag :div, user_image(current_user, 40), class: "text-area-image" %>
-                <%= f.text_area :body, class: "form-control", placeholder: "What's on your mind, #{current_user.firstname}?" %>
+          <h5 class="card-header">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="post-tab" data-toggle="tab" href="#post" role="tab" aria-controls="post" aria-selected="true">Create Post</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="image-tab" data-toggle="tab" href="#image" role="tab" aria-controls="image" aria-selected="false">Multimedia</a>
+              </li>
+            </ul>
+          </h5>
+          <%= form_for(@post, multipart: true) do |f| %>
+            <div class="card-body">
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="post" role="tabpanel" aria-labelledby="post-tab">
+                  <div class="text-area-content">
+                    <%= content_tag :div, user_image(current_user, 40), class: "text-area-image" %>
+                    <%= f.text_area :body, class: "form-control", placeholder: "What's on your mind, #{current_user.firstname}?" %>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="image" role="tabpanel" aria-labelledby="image-tab">
+                  <div class="text-area-content">
+                    <%= content_tag :div, user_image(current_user, 40), class: "text-area-image" %>
+                    <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="6">
+                      <%= f.file_field :post_image, multiple: true, direct_upload: true, data: { target: 'dropzone.input' } %>
+                      <div class="dropzone-msg dz-message needsclick text-gray-600">
+                        <span class="dropzone-msg-title">Drag here to upload or click here to browse</span><br>
+                        <span class="dropzone-msg-desc text-sm">2 MB file size maximum. Allowed file types png, jpg.</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
+            </div>
+            <div class="card-footer">
               <%= f.submit "Post", class: "btn btn-primary text-post-button" %>
-            <% end %>
-          </div>
+            </div>
+          <% end %>
         </div>
-        <% if user_posts %>
+        <% if user_posts[0] %>
           <% @posts.each do |post| %>
             <div class="card post-card my-2">
               <div class="card-body">
@@ -37,7 +64,16 @@
                     <% end %>
                   </div>
                 </div>
-                <%= content_tag :p, post.body, class: "card-text" %>
+                <div class="post-contents">
+                 <% if post.post_image.attached? %>
+                    <div class="post-content-images">
+                      <% post.post_image.each do |img|  %>
+                        <%= post.post_image.count == 1 ? image_tag(img, class:'one-image') : image_tag(img, class:'multiple-image') %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                  <%= content_tag :p, post.body, class: "card-text" %>
+                </div>
                 <div class="liked-users">
                   <ul class="navbar-nav d-flex align-items-center flex-row">
 
@@ -115,33 +151,33 @@
               </div>
             </div>
 
-            <!-- Modal -->
+          <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                  <div class="card-header">
+                  <div class="modal-header card-header">
                     <h5 class="modal-title" id="exampleModalLabel">Edit Post</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <%= form_for(user_post(post.id)) do |f| %>
-                    <div class="card-body">
-                      <div class="text-area-content">
-                        <%= content_tag :div, user_image(current_user, 40), class: "text-area-image" %>
-                        <%= f.text_area :body, class: "form-control card-text" %>
-                        
-                      </div>   
-                    </div>
-                    <div class="modal-footer">
-                      <%= f.submit "Save Changes", class: "btn btn-sm btn-primary"  %>
-                      <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>                       
-                    </div>
+                  <% if user_posts[1] %>
+                    <%= form_for(user_post(post.id)) do |f| %>
+                      <div class="modal-body">
+                        <div class="text-area-content">
+                          <%= content_tag :div, user_image(current_user, 40), class: "text-area-image" %>
+                          <%= f.text_area :body, class: "form-control modal-text" %>
+                        </div>   
+                      </div>
+                      <div class="modal-footer">
+                        <%= f.submit "Save Changes", class: "btn btn-sm btn-primary modal-btn"  %>
+                        <button type="button" class="btn btn-sm btn-secondary modal-btn" data-dismiss="modal">Close</button>                       
+                      </div>
+                    <% end %>
                   <% end %>
                 </div>
               </div>
             </div>
-          </div>
 
           <% end %>
         <% else %>
@@ -214,3 +250,4 @@
       </div>
     </div>
   </div>
+</div>

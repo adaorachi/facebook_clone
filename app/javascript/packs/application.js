@@ -17,3 +17,6 @@ require("channels")
 // const imagePath = (name) => images(name, true)
 
 require("bootstrap/dist/js/bootstrap")
+
+import "controllers"
+

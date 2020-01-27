@@ -336,6 +336,27 @@ body,
     padding: 2px;
   }
 
+  .post-content-images {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+
+    img {
+      margin: 5px 1%;
+    }
+
+    img.one-image {
+      flex-basis: 80%;
+      width: 80%;
+    }
+
+    img.multiple-image {
+      flex-basis: 48%;
+      width: 48%;
+    }
+  }
+
   .post-creator {
     display: flex;
     align-items: center;
@@ -370,6 +391,21 @@ body,
         margin: 0 0.4rem;
       }
     }
+  }
+
+  .modal {
+    .modal-header h5,
+    .modal-text {
+      font-size: 0.9rem;
+      color: #000;
+    }
+    .text-area-content {
+      height: 100px;
+    }
+     .modal-btn {
+      font-size: 0.8rem;
+      padding: 0.1rem 0.3rem;
+     }
   }
 
   .liked-users {
@@ -416,6 +452,7 @@ body,
 
       &::placeholder {
         transform: translateY(3px);
+        font-size: 0.9rem;
       }
     }
   }
@@ -480,7 +517,7 @@ body,
   }
 
   .profile-banner {
-    background: #1a2947;
+    background: #1a2947 url("banner.jpg") no-repeat center center;
     height: 220px;
   }
 
@@ -577,4 +614,51 @@ textarea:focus {
   font-size: 0.8rem;
 }
 
+// Dropzone
 
+.dropzone {
+  border: 2px dashed #aaa;
+  width: 100%;
+  text-align: center;
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: 20px;
+  display: flex;
+  flex-wrap: wrap;
+
+  &.dz-drag-hover {
+    border: 2px dashed #aaa;
+    width: 100%;
+    text-align: center;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 20px;
+
+    .dz-message {
+      opacity: 0.9;
+    }
+  }
+
+  .dz-success-mark,
+  .dz-error-mark,
+  .dz-details {
+    display: none;
+  }
+
+  .dz-image img {
+    border-radius: 20px;
+    width: 70px;
+  }
+
+  .dropzone-msg.dz-message {
+    flex-basis: 100%;
+    width: 100%
+  }
+
+  .dz-preview {
+    flex-basis: 33%;
+    width: 33%
+  }
+}
