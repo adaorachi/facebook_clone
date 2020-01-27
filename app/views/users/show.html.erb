@@ -59,8 +59,8 @@
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item"><strong>Email: </strong> <%= @user.email%></li>
-            <li class="list-group-item"><strong>Gender: </strong> <%= @user.gender.capitalize %></li>
-            <li class="list-group-item"><strong>Birthdate: </strong> <%= @user.birthdate.strftime("%B %d") %></li>
+            <li class="list-group-item"><strong>Gender: </strong> <%= user_gender(@user) %></li>
+            <li class="list-group-item"><strong>Birthdate: </strong> <%= user_birthdate(@user) %></li>
             <li class="list-group-item"><strong>Joined since: </strong> <%= @user.created_at.strftime("%B %d, %Y") %></li>
           </ul>
         </div>
