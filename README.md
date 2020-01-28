@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+# facebook_clone
+A facebook-like social network application
+=======
 # FACEBOOK CLONE
 
 This project is a Facebook-like social network application built with rails.
@@ -41,6 +45,7 @@ This is the link to the live preview in Heroku. Feel free to visit.<br>
 The image below is a copy of the Entity Relationship Diagram generated for this project.
 <br>
 <img src="app/assets/images/erd.png" alt="Entity Relationship Diagram">
+<<<<<<< HEAD
 
 
 ## Required Installations
@@ -109,3 +114,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Acknowledgements
 
 * <a href="https://www.microverse.org/"> Microverse</a>  and <a href="https://www.theodinproject.com/"> Odin Project</a> .
+=======
+>>>>>>> development
+>>>>>>> b96ec9a0b4d8ee584c80f27700873f60695cc6d2
