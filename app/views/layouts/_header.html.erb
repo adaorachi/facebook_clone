@@ -1,0 +1,142 @@
+<header>
+  <% if current_user %>
+  <nav class="navbar navbar-loggedin navbar-expand-lg">
+    <a class="navbar-logo" href="<%= posts_path %>" title="Go to Facebook Home">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoc3H4IBuPsW1VDfef7y9FI1HUGRCWOyOMKwJLs19sX7-zIpV2&s" width="25">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <form class="form-inline">
+        <div class="search-form">
+          <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-secondary search-button" type="submit">
+            <%= fa_icon "search", class: "search-icon text-secondary" %> 
+          </button>
+        </div>
+      </form>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item gravatar-list r-border"> 
+          <%= link_to user_path(current_user), class: "nav-link gravatar-link" do %>
+            <%= content_tag :span, gravatar_for(current_user, size:23) %>
+            <%= content_tag :span, current_user.firstname, class: "username" %>
+          <% end %>
+        </li>
+        <li class="nav-item r-border">
+          <%= link_to "Home", posts_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item r-border">
+          <%= link_to "Find Friends", users_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item r-border">
+          <%= link_to "Create", posts_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link request-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" title="Friend Requests" aria-haspopup="true" aria-expanded="false">
+            <%= fa_icon "users", class: "user-icon nav-icon" %> 
+            <% if current_user.pending_requests_from_users.count.positive? %>
+              <span class="badge badge-light request-count"><%= current_user.pending_requests_from_users.count %></span>
+            <% end %>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <ul class="dropdown-item  alert alert-success text-center">
+              <% if current_user.pending_requests_from_users.count.positive? %>
+                <% current_user.pending_requests_from_users.each do |user| %>
+                  <a class="list-group-item list-group-item-action request-sent-text", href="<%= received_request_path %>"><%= user.name %> sent you a friend request</a>
+                <% end %>
+              <% else %>
+                <li class="list-group-item list-group-item-action">You have no friend request</li>
+              <% end %>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" title="Messages" aria-haspopup="true" aria-expanded="false">
+            <%= fa_icon "comment", class: "comment-icon nav-icon" %> 
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" title="Notifications" aria-haspopup="true" aria-expanded="false">
+            <%= fa_icon "bell", class: "comment-icon nav-icon" %> 
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" title="Quick Help" aria-haspopup="true" aria-expanded="false">
+            <%= fa_icon "question-circle", class: "comment-icon nav-icon" %> 
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle logout-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <%= link_to 'Edit Account', edit_user_registration_path, class:"dropdown-item" %>
+            <%= link_to 'Settings', '', class:"dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to 'Logout', destroy_user_session_path, class: "dropdown-item", method: :delete %>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <% else %>
+    <nav class="navbar navbar-session navbar-expand-lg">
+      <a href="<%= root_path %>" title="Go to Facebook home" class="navbar-brand">facebook</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">   
+        <% if controller_name == 'static_pages' %>
+          <div class="ml-auto">
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <div class="field">
+                    <%= f.label :email %><br />
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                  </div>
+                </li>
+
+                <li class="nav-item">
+                  <div class="field">
+                    <%= f.label :password %><br />
+                    <%= f.password_field :password, autocomplete: "current-password" %>
+                  </div>
+                  <div>
+                    <%= link_to "Forgot your password?", new_password_path(:user) %>
+                  </div>
+                </li>
+
+                <li class="nav-item login_button">
+                  <div class="field">
+                    <%= f.submit "Log in" %>
+                  </div>
+                </li>
+              </ul>
+            <% end %>
+          </div>
+        <% elsif controller_name == 'sessions' %>
+          <div class="mr-auto">
+            <%= link_to "Create New Account", new_registration_path(resource_name), class: "btn btn-success" %>
+          </div>
+        <% elsif controller_name == 'registrations' %>
+          <div class="ml-auto">
+            <%= link_to "Log in to Existing Account", new_session_path(resource_name), class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </nav>
+  <% end %>
+</header>

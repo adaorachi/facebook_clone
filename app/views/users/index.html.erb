@@ -1,0 +1,35 @@
+<div class="container-fluid newsfeed non-friends-list py-2">
+  <div class="row right-column">
+
+    <%= render 'shared/sidebar'%>
+
+    <div class="col-8">
+      <% if @users.count.positive? %>
+        <div class="card">
+          <div class="card-header d-flex flex-column">
+            <span>People you may know</span>
+            <span><%= link_to 'View Recieved Request', received_request_path %></span>
+          </div>
+          <ul class="list-group list-group-flush">
+            <% @users.each do |user| %>
+              <li class="list-group-item">
+                <div class="post-creator">
+                <span><%= link_to gravatar_for(user, size: 55 ), user_path(user), class: "non-friend-image" %></span>
+                  <div class="post-creator-info d-flex justify-content-between align-items-center">
+                    <p class="card-subtitle ">
+                      <%= link_to user.name, user_path(user) %>
+                    </p>
+                    <%= form_for(current_user.active_friendships.build) do |f| %>
+                      <%= hidden_field_tag :passive_friend_id, user.id %> 
+                      <%= f.button fa_icon("user-plus", text: "Add Friend"), class: "btn btn-sm btn-blue friend-btn" %>
+                    <% end %>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
