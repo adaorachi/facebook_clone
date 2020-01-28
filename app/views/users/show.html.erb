@@ -74,14 +74,18 @@
             <% end %>    
           </h6>
           <div class="card-body">
-            <%  if user_friend(@user)[0] %>
-            <div class="user-friend_profiles non-friends-list">
-              <% @user.friends.each do |friend| %>
-                <div class="user-friend-pro">
-                  <p><%= user_image(friend, 100) %></p>
-                  <%= friend.name %>
-                </div>
-              <% end %>
+            <% if user_friend(@user)[0] %>
+              <div class="user-friend_profiles non-friends-list flex-wrap">
+                <% @user.friends.each do |friend| %>
+                <%= link_to( user_path(friend.id), class: "user-friend-pro") do %>
+                  <div class="px-2">
+                    <p class="d-flex flex-column text-center">
+                      <span><%= user_image(friend, 100) %></span>
+                      <span class="text-dark"><%= friend.name %></span>
+                    </p>
+                  </div>
+                  <% end %>
+                <% end %>
               </div>
             <% else %>
               <div class="card text-center py-3">

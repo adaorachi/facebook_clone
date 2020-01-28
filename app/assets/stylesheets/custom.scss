@@ -556,10 +556,10 @@ body,
     .user-friend-pro {
       flex-basis: 33%;
       width: 33%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+
+      img {
+        width: 100%;
+      }
     }
   }
 }
