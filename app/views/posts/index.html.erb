@@ -211,6 +211,11 @@
                       <%= hidden_field_tag :active_friend_id, friend.id %>
                       <%= f.button fa_icon("user-slash", text: "Unfriend"), class: "btn btn-sm btn-danger friend-btn", method: :delete, data: {confirm: 'Are you sure?'} %>
                     <% end %>
+                    <span>
+                      <small>
+                        <%= mutual_friends(current_user, friend) %>
+                      </small>
+                    </span>
                   </div>
                 </div>
                 </li>
@@ -242,6 +247,11 @@
                         <%= hidden_field_tag :passive_friend_id, user.id %> 
                         <%= f.button fa_icon("user-plus", text: "Add Friend"), class: "btn btn-sm btn-blue friend-btn" %>
                       <% end %>
+                       <span>
+                        <small>
+                          <%= mutual_friends(current_user, user) %>
+                        </small>
+                      </span>
                     </div>
                   </div>
                 </li>

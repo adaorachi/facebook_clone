@@ -42,4 +42,17 @@ module UsersHelper
     [is_positive, count]
   end
   
+  def mutual_friends(current_user, user_friend)
+    arr_friend = ''
+    mutual_f = current_user.friends && user_friend.friends
+    mutual_friendship = mutual_f.map {|friend| friend if current_user.friend?(friend)}.compact
+    if mutual_friendship.count == 1
+      arr_friend = "<strong>#{mutual_friendship.first.name}</strong> is a mutual friend"
+    elsif mutual_friendship.count > 1
+      arr_friend = "<strong>#{mutual_friendship.first.name}</strong> and other #{pluralize(mutual_friendship.count - 1, 'mutual friend')}"
+    else
+      arr_friend = 'No mutual friend'
+    end
+    arr_friend.html_safe
+  end
 end
