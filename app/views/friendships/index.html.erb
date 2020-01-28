@@ -1,0 +1,47 @@
+<div class="container-fluid newsfeed py-2">
+  <div class="row right-column">
+
+    <%= render 'shared/sidebar'%>
+
+    <div class="col-8">
+      <div class="card">
+        <% if user_friend(current_user)[0] %>
+          <div class="card-header d-flex flex-column">
+            <span>
+              <strong>Friend List </strong>
+              </span>
+            <span><%= link_to 'View Received Request', received_request_path %></span>
+          </div>
+          <ul class="list-group list-group-flush non-friends-list">
+            <% current_user.friends.each do |friend| %>
+              <li class="list-group-item">
+                <div class="post-creator">
+                  <span><%= link_to user_image(friend, 40), user_path(friend), class: "comment-image" %></span>
+                  <div class="post-creator-info d-flex justify-content-between align-items-center">
+                    <p class="card-subtitle d-flex flex-column">
+                      <%= link_to friend.name, user_path(friend) %>
+                      <span>
+                        <small>
+                          <%= mutual_friends(current_user, friend) %>
+                        </small>
+                      </span>
+                    </p>
+                    <%= form_for(active_friendship(friend.id), html: { method: :delete }) do |f| %>
+                      <%= hidden_field_tag :active_friend_id, friend.id %>
+                      <%= f.button fa_icon("user-slash", text: "Unfriend"), class: "btn btn-sm btn-danger friend-btn", method: :delete, data: {confirm: 'Are you sure?'} %>
+                    <% end %>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <li class="list-group-item">
+            Sorry! You have no friends! Make new friends
+            <%= link_to 'here', users_path %> 
+          </li>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

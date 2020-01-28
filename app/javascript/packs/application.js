@@ -15,3 +15,17 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+require("bootstrap/dist/js/bootstrap")
+
+import "controllers"
+
+$(document).on('turbolinks:load', function(){
+
+  var pathname = $(location).attr('pathname');
+  var class_name = pathname.substring(1);
+  var array = ['/posts', '/users', '/friendships', '/received_request', '/sent_request']
+    if( array.includes(pathname) ){
+      $('.'+class_name).addClass("active")
+    }
+})

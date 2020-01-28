@@ -13,3 +13,15 @@
  *= require_tree .
  *= require_self
  */
+ .alert-alert {
+  @extend .alert-danger;
+  }
+  .alert-notice {
+  @extend .alert-success;
+  }
+
+  @import "bootstrap/scss/bootstrap";
+  @import 'font_awesome5_webfont';
+  @import "dropzone/dist/min/dropzone.min.css";
+  @import "dropzone/dist/min/basic.min.css";
+  
