@@ -22,8 +22,8 @@ class User < ApplicationRecord
 
   validates :firstname, presence: true, length: { in: 3..100 }
   validates :surname, presence: true, length: { in: 3..100 }
-  validates :birthdate, presence: { message: "(Date of Birth) must be entered" } 
-  validates :gender, presence: { message: "must be selected" } 
+  # validates :birthdate, presence: { message: "(Date of Birth) must be entered" } 
+  # validates :gender, presence: { message: "must be selected" } 
 
   def name
     "#{firstname} #{surname}"
@@ -96,9 +96,9 @@ class User < ApplicationRecord
     user.password = Devise.friendly_token[0, 20]
     user.firstname = auth.info.first_name
     user.surname = auth.info.last_name
-    user.gender = auth.extra.raw_info.gender
-    user.birthdate = user_birthdate(auth.extra.raw_info.birthday)
     user.image = auth.info.image
+    # user.gender = auth.extra.raw_info.gender
+    # user.birthdate = user_birthdate(auth.extra.raw_info.birthday)
   end
 end
 
