@@ -37,9 +37,9 @@ Full task description: <a href="https://www.theodinproject.com/courses/ruby-on-r
 ## Live Preview
 
 This is the link to the live preview in Heroku. Feel free to visit.<br>
-<a href="">Private Events</a> <br>
+<a href="https://still-plateau-86976.herokuapp.com">FaceBook Clone</a> <br>
 <p>Below is the HomePage Screenshot</p>
-<img src="app/assets/images/facebook-clone.png" alt="Facebook-clone">
+<img src="app/assets/images/facebook-clone.jpg" alt="Facebook-clone">
 
 ## Data Architecture Documentation (ERD)
 The image below is a copy of the Entity Relationship Diagram generated for this project.

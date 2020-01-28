@@ -1,4 +1,4 @@
-<div class="container-fluid newsfeed non-friends-list py-2">
+<div class="container-fluid newsfeed py-2">
   <div class="row right-column">
 
     <%= render 'shared/sidebar'%>
@@ -12,7 +12,7 @@
               </span>
             <span><%= link_to 'View Received Request', received_request_path %></span>
           </div>
-          <ul class="list-group list-group-flush">
+          <ul class="list-group list-group-flush non-friends-list">
             <% current_user.friends.each do |friend| %>
               <li class="list-group-item">
                 <div class="post-creator">

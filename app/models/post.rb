@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :user
+  has_many_attached :post_image
   has_many :comments, dependent: :destroy
 
   has_many :like_posts, foreign_key: 'post_id', dependent: :destroy

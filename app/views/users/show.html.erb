@@ -59,8 +59,8 @@
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item"><strong>Email: </strong> <%= @user.email%></li>
-            <li class="list-group-item"><strong>Gender: </strong> <%= @user.gender.capitalize %></li>
-            <li class="list-group-item"><strong>Birthdate: </strong> <%= @user.birthdate.strftime("%B %d") %></li>
+            <li class="list-group-item"><strong>Gender: </strong> <%= user_gender(@user) %></li>
+            <li class="list-group-item"><strong>Birthdate: </strong> <%= user_birthdate(@user) %></li>
             <li class="list-group-item"><strong>Joined since: </strong> <%= @user.created_at.strftime("%B %d, %Y") %></li>
           </ul>
         </div>
@@ -84,25 +84,44 @@
               <% end %>
               </div>
             <% else %>
-              <p class="text-center">You have no friend</p>
+              <div class="card text-center py-3">
+                <% if @user == current_user %>
+                  <h2>You have no friend.</h2>
+                <% else %>
+                  <h2><%= @user.name %> has no friend.</h2>
+                <% end %>
+              </div>
             <% end %>
           </div>
         </div>
       </div>
 
       <div class="col-7">
-        <% if user_posts %>
+        <% if user_posts[0] %>
           <% @posts.each do |post| %>
               <div class="card post-card my-2">
                 <div class="card-body">
-                  <div class="post-creator mb-3">
-                    <span><%= link_to user_image(post.user, 35), user_path(post.user), class: "post-image" %></span>
-                    <div class="post-creator-info">
-                      <p class="card-subtitle "><%= link_to name(post.user), user_path(post.user) %></p>
-                      <p class="card-subtitle"><%= distance_of_time_in_words(Time.now, post.created_at) %> ago</p>
+                  <div class="post-creator d-flex justify-content-between mb-3">
+                    <div class="post-creator-details d-flex">
+                      <span><%= link_to user_image(post.user, 35), user_path(post.user), class: "post-image" %></span>
+                      <div class="post-creator-info">
+                        <p class="card-subtitle "><%= link_to name(post.user), user_path(post.user) %></p>
+                        <p class="card-subtitle"><%= distance_of_time_in_words(Time.now, post.created_at) %> ago</p>
+                      </div>
                     </div>
+                   
                   </div>
-                  <%= content_tag :p, post.body, class: "card-text" %>
+                  <div class="post-contents">
+                  <% if post.post_image.attached? %>
+                      <div class="post-content-images">
+                        <% post.post_image.each do |img|  %>
+                          <%= post.post_image.count == 1 ? image_tag(img, class:'one-image') : image_tag(img, class:'multiple-image') %>
+                        <% end %>
+                      </div>
+                    <% end %>
+                    <%= content_tag :p, post.body, class: "card-text" %>
+                  </div>
+                  
                   <div class="liked-users">
                     <ul class="navbar-nav d-flex align-items-center flex-row">
 

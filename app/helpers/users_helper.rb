@@ -14,6 +14,14 @@ module UsersHelper
     end
   end
 
+  def user_gender(user)
+    user.gender ? user.gender.capitalize : 'Unknown'
+  end
+
+  def user_birthdate(user)
+    user.birthdate ? user.birthdate.strftime("%B %d") : 'Unknown'
+  end
+
   def username(user)
     user.email.split('@')[0].capitalize
   end
