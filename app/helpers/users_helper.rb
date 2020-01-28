@@ -49,7 +49,7 @@ module UsersHelper
     if mutual_friendship.count == 1
       arr_friend = "<strong>#{mutual_friendship.first.name}</strong> is a mutual friend"
     elsif mutual_friendship.count > 1
-      arr_friend = "<strong>#{mutual_friendship.first.name}</strong> and #{pluralize(mutual_friendship.count - 1)} other mutual #{pluralize(mutual_friendship.count - 1, 'friend')}"
+      arr_friend = "<strong>#{mutual_friendship.first.name}</strong> and #{mutual_friendship.count - 1} other mutual #{pluralize(mutual_friendship.count - 1, 'friend')}"
     else
       arr_friend = 'No mutual friend'
     end
