@@ -114,7 +114,7 @@
 
               <div class="show-comments">
                 <ul class="list-group list-group-flush">
-                    <%= content_tag :li, "View #{pluralize(post.comments.count, 'comment')}", class: 'text-primary' if post.comments.count.positive? %>
+                    <%= content_tag :li, "View #{pluralize(post.comments.count, 'comment')}", class: 'text-primary list-group-item' if post.comments.count.positive? %>
                   <% post.comments.each do |comment| %>
                     <li class="list-group-item">
                       <div class="post-creator">
