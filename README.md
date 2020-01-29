@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# facebook_clone
-A facebook-like social network application
-=======
 # FACEBOOK CLONE
 
 This project is a Facebook-like social network application built with rails.
@@ -26,6 +22,7 @@ This project requests you to build a Facebook-like social network application.
 
 Full task description: <a href="https://www.theodinproject.com/courses/ruby-on-rails/lessons/final-project"> Odin Project.</a>
 
+<!-- BUILT WITH -->
 ### Built With 
 
 * HTML
@@ -34,6 +31,7 @@ Full task description: <a href="https://www.theodinproject.com/courses/ruby-on-r
 * Ruby
 * Ruby on Rails
 
+<!-- LIVE PREVIEW -->
 ## Live Preview
 
 This is the link to the live preview in Heroku. Feel free to visit.<br>
@@ -41,13 +39,13 @@ This is the link to the live preview in Heroku. Feel free to visit.<br>
 <p>Below is the HomePage Screenshot</p>
 <img src="app/assets/images/facebook-clone.jpg" alt="Facebook-clone">
 
+<!-- ERD -->
 ## Data Architecture Documentation (ERD)
 The image below is a copy of the Entity Relationship Diagram generated for this project.
 <br>
 <img src="app/assets/images/erd.png" alt="Entity Relationship Diagram">
-<<<<<<< HEAD
 
-
+<!-- REQUIRED INSTALLATION -->
 ## Required Installations
 
 <p>If you want a copy of this project running on your machine you have to install:</p>
@@ -59,8 +57,8 @@ The image below is a copy of the Entity Relationship Diagram generated for this 
 
 <a href="https://www.tutorialspoint.com/ruby-on-rails/rails-installation"> Installation Instructions</a>
 
-<!-- INSTALATION -->
-## Instalation of This App
+<!-- INSTALLATION -->
+## Installation of This App
 
 Once you have installed the requiered packages shown on the [Required Installations](#required-installations), proceed with the following steps
 
@@ -114,6 +112,3 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Acknowledgements
 
 * <a href="https://www.microverse.org/"> Microverse</a>  and <a href="https://www.theodinproject.com/"> Odin Project</a> .
-=======
->>>>>>> development
->>>>>>> b96ec9a0b4d8ee584c80f27700873f60695cc6d2
