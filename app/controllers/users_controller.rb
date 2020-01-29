@@ -9,4 +9,9 @@ class UsersController < ApplicationController
     @active_friendship = current_user.active_friendships.build
     @posts = @user.posts
   end
+
+  def search
+    @search_users = User.search_user(params[:q])
+    # @search_users = User.all if @search_users.nil?
+  end
 end

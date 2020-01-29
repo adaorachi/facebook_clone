@@ -49,10 +49,26 @@ module UsersHelper
     if mutual_friendship.count == 1
       arr_friend = "<strong>#{mutual_friendship.first.name}</strong> is a mutual friend"
     elsif mutual_friendship.count > 1
-      arr_friend = "<strong>#{mutual_friendship.first.name}</strong> and other #{pluralize(mutual_friendship.count - 1, 'mutual friend')}"
+      arr_friend = "<strong>#{mutual_friendship.first.name}</strong> and #{mutual_friendship.count - 1} other mutual "
+      arr_friend += "friend".pluralize(mutual_friendship.count - 1)
     else
       arr_friend = 'No mutual friend'
     end
     arr_friend.html_safe
+  end
+
+  def search_info(search, searched_count)
+    searched_info = ''
+    if searched_count.present?
+        searched_info = "Search for \"#{search}\"<br> "
+        searched_info += "Result for #{pluralize(searched_count.count, 'user')}"
+    else
+      if search.present?
+        searched_info = "No search for \"#{search}\""
+      else
+        searched_info = "Search for something"
+      end
+    end
+    searched_info.html_safe
   end
 end
