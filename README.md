@@ -37,7 +37,7 @@ Full task description: <a href="https://www.theodinproject.com/courses/ruby-on-r
 This is the link to the live preview in Heroku. Feel free to visit.<br>
 <a href="https://still-plateau-86976.herokuapp.com">FaceBook Clone</a> <br>
 <p>Below is the HomePage Screenshot</p>
-<img src="app/assets/images/facebook-clone.jpg" alt="Facebook-clone">
+<img src="app/assets/images/facebook-clone1.jpg" alt="Facebook-clone">
 
 <!-- ERD -->
 ## Data Architecture Documentation (ERD)
