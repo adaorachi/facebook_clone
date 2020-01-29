@@ -86,6 +86,15 @@ class User < ApplicationRecord
     friendship2.destroy
   end
 
+  def self.search_user(search)
+    split_search = search.downcase.split(" ")
+    if split_search.count == 1
+      User.all.where("lower(firstname) LIKE :search OR lower(surname) LIKE :search", search: "%#{split_search.first}%")
+    elsif split_search.count > 1
+      User.all.where("lower(firstname) LIKE :f_search AND lower(surname) LIKE :s_search", f_search: "%#{split_search[0]}%", s_search: "%#{split_search[1]}%")
+    end 
+  end
+
   scope :not_friends, ->(current_user) { where.not(id: current_user.friends_and_requests_id).where('id != ?', current_user) }
 
 

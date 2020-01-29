@@ -1,0 +1,43 @@
+<div class="container-fluid newsfeed py-2">
+  <div class="row right-column">
+   <%= render 'shared/sidebar'%>
+
+    <div class="col-8">
+      <div class="card mb-3">
+        <div class="card-header">
+          <p>
+          <strong>
+            <%= search_info(params[:search], @search_users) %>
+          </strong>
+          </p>
+        </div>
+      </div>
+      <% if @search_users.count.positive? %>
+        <div class="card">
+          <div class="card-header d-flex flex-column">
+            <ul class="list-group list-group-flush non-friends-list">
+              <% @search_users.each do |user| %>
+                <li class="list-group-item">
+                  <div class="post-creator">
+                  <span><%= link_to user_image(user, 55), user_path(user), class: "non-friend-image" %></span>
+                    <div class="post-creator-info d-flex justify-content-between align-items-center">
+                      <p class="card-subtitle d-flex flex-column">
+                        <%= link_to user.name, user_path(user) %>
+                        <span>
+                          <small>
+                            <%= mutual_friends(current_user, user) %>
+                          </small>
+                        </span>
+                      </p>
+                    
+                    </div>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -56,4 +56,19 @@ module UsersHelper
     end
     arr_friend.html_safe
   end
+
+  def search_info(search, searched_count)
+    searched_info = ''
+    if searched_count
+      if searched_count.count.positive? 
+        searched_info = "Search for \"#{search}\"<br> "
+        searched_info += "Result for #{pluralize(searched_count.count, 'user')}"
+      else
+        searched_info = "No search for \"#{search}\""
+      end
+    else
+      searched_info = "Search for something"
+    end
+    searched_info.html_safe
+  end
 end
