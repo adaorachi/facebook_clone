@@ -7,12 +7,12 @@
         <div class="card-header">
           <p>
           <strong>
-            <%= search_info(params[:search], @search_users) %>
+            <%= search_info(params[:q], @search_users) %>
           </strong>
           </p>
         </div>
       </div>
-      <% if @search_users.count.positive? %>
+      <% if @search_users.present? %>
         <div class="card">
           <div class="card-header d-flex flex-column">
             <ul class="list-group list-group-flush non-friends-list">

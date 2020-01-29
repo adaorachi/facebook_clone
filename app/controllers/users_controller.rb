@@ -12,5 +12,6 @@ class UsersController < ApplicationController
 
   def search
     @search_users = User.search_user(params[:q])
+    # @search_users = User.all if @search_users.nil?
   end
 end
