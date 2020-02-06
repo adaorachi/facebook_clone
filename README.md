@@ -18,7 +18,7 @@ This project is a Facebook-like social network application built with rails. It 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project requests you to build a Facebook-like social network application. In this project users can sign up either through the app or with their facebook account. Once a user becomes a member, such user can be able to create posts and comments on other posts and in which only his/her friend can see and view. A user can also be able to post images too. A user can friend or unfriend a user. The main goal is to put in practice the main concepts of Associations, Authentication with devise gem, and units & integration tests in rails.
+This project is a Facebook-like social network application. In this project, users can sign up either through the app or with their facebook account. Once a user becomes a member, such user can be able to create posts and comments on other posts and in which only his/her friends can see and view. A user can also be able to post images too. A user can friend or unfriend a user. The main goal is to put in practice the main concepts of Model Associations, Session Authentications with devise gem, and units & integration testing with RSpec and Capybara.
 
 Full task description: <a href="https://www.theodinproject.com/courses/ruby-on-rails/lessons/final-project"> Odin Project.</a>
 
@@ -45,6 +45,7 @@ This is the link to the live preview in Heroku. Feel free to visit.<br>
 * Posts are created by users and only a user's friend can view or see them.
 * User can comment can on his/her post or on other users post.
 * Users can like posts and comments.
+* Users can search for other users with the search input by their names.
 
 <!-- ERD -->
 ## Data Architecture Documentation (ERD)
