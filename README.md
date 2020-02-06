@@ -1,11 +1,3 @@
-
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-
-
 # FACEBOOK CLONE
 
 This project is a Facebook-like social network application built with rails. It implements the basic functionality found on the popular social media app called Facebook.
@@ -47,7 +39,7 @@ This is the link to the live preview in Heroku. Feel free to visit.<br>
 <p>Below is the HomePage Screenshot</p>
 <img src="app/assets/images/facebook-clone1.jpg" alt="Facebook-clone">
 
-# Features
+## Features
 
 * Users can signup and send friend requests to other users.
 * Posts are created by users and only a user's friend can view or see them.
