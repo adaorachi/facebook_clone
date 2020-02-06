@@ -1,6 +1,14 @@
+
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+
+
 # FACEBOOK CLONE
 
-This project is a Facebook-like social network application built with rails.
+This project is a Facebook-like social network application built with rails. It implements the basic functionality found on the popular social media app called Facebook.
 
 ## Table of Contents
 
@@ -18,7 +26,7 @@ This project is a Facebook-like social network application built with rails.
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project requests you to build a Facebook-like social network application.
+This project requests you to build a Facebook-like social network application. In this project users can sign up either through the app or with their facebook account. Once a user becomes a member, such user can be able to create posts and comments on other posts and in which only his/her friend can see and view. A user can also be able to post images too. A user can friend or unfriend a user. The main goal is to put in practice the main concepts of Associations, Authentication with devise gem, and units & integration tests in rails.
 
 Full task description: <a href="https://www.theodinproject.com/courses/ruby-on-rails/lessons/final-project"> Odin Project.</a>
 
@@ -38,6 +46,13 @@ This is the link to the live preview in Heroku. Feel free to visit.<br>
 <a href="https://still-plateau-86976.herokuapp.com">FaceBook Clone</a> <br>
 <p>Below is the HomePage Screenshot</p>
 <img src="app/assets/images/facebook-clone1.jpg" alt="Facebook-clone">
+
+# Features
+
+* Users can signup and send friend requests to other users.
+* Posts are created by users and only a user's friend can view or see them.
+* User can comment can on his/her post or on other users post.
+* Users can like posts and comments.
 
 <!-- ERD -->
 ## Data Architecture Documentation (ERD)
